@@ -5,9 +5,11 @@ from .models import Category
 from .serializers import CategotySerielizer
 
 # Create your views here.
-class CategoryView(viewsets.ViewSet):
+class CategoryViewSet(viewsets.ViewSet):
     """
-    TODO: A simple viewset for viewing categories -> https://www.django-rest-framework.org/api-guide/viewsets/
+    TODO: 
+        A simple viewset for viewing categories -> https://www.django-rest-framework.org/api-guide/viewsets/
+        Different kinds of viewset -> https://www.django-rest-framework.org/api-guide/viewsets/#viewset-actions
     """
     questyset = Category.objects.all()
 
