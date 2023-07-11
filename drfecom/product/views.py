@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
+from drf_spectacular.utils import extend_schema
 from .models import Category
 from .serializers import CategotySerielizer
 
@@ -13,6 +14,7 @@ class CategoryViewSet(viewsets.ViewSet):
     """
     questyset = Category.objects.all()
 
+    @extend_schema(responses=CategotySerielizer)
     def list(self, request):
         serielizer = CategotySerielizer(self.questyset, many=True)
         return Response(serielizer.data)

@@ -30,3 +30,4 @@
  - Use `black` for formatting code
  - Use `flake8` for linting the code
  - Create super user `./manage.py createsuperuser`
+ - Create schema for api documentation `./manage.py spectacular --file schema.yml`
