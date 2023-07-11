@@ -2,3 +2,6 @@ virtual-env
 **__pycache__
 .pytest_cache
 drfecom/db.sqlite3
+drfecom/schema.yml
+drfecom/.coverage
+drfecom/htmlcov
