@@ -27,3 +27,5 @@
  pip install pytest-django
  pytest
  ```
+ - Use `black` for formatting code
+ - 
