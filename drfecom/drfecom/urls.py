@@ -23,6 +23,8 @@ from product import views
 
 router = DefaultRouter()
 router.register(r"category", views.CategoryViewSet, basename="CategoryModel")
+router.register(r"brand", views.BrandViewSet, basename="BrandModel")
+router.register(r"product", views.ProductViewSet, basename="ProductModel")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
