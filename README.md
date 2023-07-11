@@ -31,3 +31,12 @@
  - Use `flake8` for linting the code
  - Create super user `./manage.py createsuperuser`
  - Create schema for api documentation `./manage.py spectacular --file schema.yml`
+ - Running tests with coverage
+ ```
+ coverage
+ coverage html
+ coverage run -m pytest
+ pytest --cov
+ ```
+
+ - Left at __https://www.youtube.com/watch?v=ktuOUaOyMmo&list=PLOLrQ9Pn6cawinBJbH5d9IfloO9RRPMiq&index=31__
