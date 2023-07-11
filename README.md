@@ -1,3 +1,5 @@
+# Furniture ecommerce website
+
  - [Tutorial](https://www.youtube.com/watch?v=jUsm_LV4_cE&list=PLOLrQ9Pn6cawinBJbH5d9IfloO9RRPMiq&index=8)
 
  - Setup
@@ -17,4 +19,11 @@
  python3 manage.py shell
  >>> from django.core.management.utils import get_random_secret_key
  >>> print(get_random_secret_key())
+ ```
+ - Testing the project
+ ```
+ pip install pytest
+ pytest --help
+ pip install pytest-django
+ pytest
  ```
