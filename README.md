@@ -28,4 +28,4 @@
  pytest
  ```
  - Use `black` for formatting code
- - 
+ - Use `flake8` for linting the code
