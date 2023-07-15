@@ -1,4 +1,4 @@
-virtual-env
+backend/virtual-env
 **__pycache__
 .pytest_cache
 backend/db.sqlite3
