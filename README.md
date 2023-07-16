@@ -40,6 +40,7 @@
  ```
 
 ### Inspirations
+ - https://99grid.com/
  - django-rest-framework-json-api - https://github.com/django-json-api/django-rest-framework-json-api
  - Django REST Registration - https://github.com/apragacz/django-rest-registration
  - deep-dive-drf-model-serializer-relations - https://github.com/oscarychen/deep-dive-drf-model-serializer-relations
