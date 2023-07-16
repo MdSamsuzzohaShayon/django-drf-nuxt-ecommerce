@@ -130,3 +130,7 @@ REST_FRAMEWORK = {
 SPECTACULAR_SETTINGS={
     "TITLE": "Django DRF Ecommerce"
 }
+
+# Handle upload files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
