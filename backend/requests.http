@@ -1,17 +1,31 @@
-GET http://localhost:8000/api
+### Get all product
+GET http://localhost:8000/api/products/categories/
 Content-Type: application/json
-###
 
-GET http://localhost:8000/api/category
+
+### Create a category
+POST http://localhost:8000/api/products/categories/new/
 Content-Type: application/json
-###
+
+{
+    "name": "Chair"
+}
 
 
-GET http://localhost:8000/api/product
+### Create a product
+POST http://localhost:8000/api/products/new/
 Content-Type: application/json
-###
+
+{
+    "title" : "Chair Product -2",
+    "price": 20,
+    "discount_price": 15,
+    "total_stock": 5,
+    "description": "product desc",
+    "category" : 1
+}
 
 
-GET http://localhost:8000/api/brand
+### Get a product
+GET http://localhost:8000/api/products/1/
 Content-Type: application/json
-###

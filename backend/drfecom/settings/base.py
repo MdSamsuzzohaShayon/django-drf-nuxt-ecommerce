@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'rest_framework',
     "drf_spectacular",
     # Internal Apps
-    'products'
+    'products',
+    'accounts',
+    'orders',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +137,15 @@ SPECTACULAR_SETTINGS={
 # Handle upload files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+AUTH_USER_MODEL = "accounts.User"
+
+# DEFAULT_FROM_EMAIL = 'noreply@pysell.ir'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # The port for your SMTP server (usually 587 for TLS)
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'mdsamsuzzoha5222@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'ntywgfxtjzjfsykd'  # Your email password
