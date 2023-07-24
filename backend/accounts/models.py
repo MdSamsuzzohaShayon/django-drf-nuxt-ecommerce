@@ -17,13 +17,14 @@ class UserManager(BaseUserManager):
         birth and password.
         """
         if not email:
-            raise ValueError("Users must have an email address")
+            raise ValueError("User must have an email address")
 
         user = self.model(email=self.normalize_email(email), **extra_fields)
 
         user.set_password(password)
         user.save(using=self._db)
         return user
+    
 
     def create_superuser(self, email, password=None, **extra_fields):
         """
@@ -59,4 +60,3 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         self.username = self.email
         super().save(*args, **kwargs)
-

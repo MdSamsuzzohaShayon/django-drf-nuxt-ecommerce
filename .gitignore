@@ -5,4 +5,5 @@ backend/db.sqlite3
 backend/schema.yml
 backend/.coverage
 backend/htmlcov
+backend/.env
 /backend/drfecom/media/uploads
