@@ -15,20 +15,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
-from product import views
-
-router = DefaultRouter()
-router.register(r"category", views.CategoryViewSet, basename="CategoryModel")
-router.register(r"brand", views.BrandViewSet, basename="BrandModel")
-router.register(r"product", views.ProductViewSet, basename="ProductModel")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
     path('api/schema/', SpectacularAPIView.as_view(), name="schema"),
-    path('api/schema/docs/', SpectacularSwaggerView.as_view(url_name="schema"), name="docs"),
-]
+    # path('api/schema/docs/', SpectacularSwaggerView.as_view(url_name="schema"), name="docs"),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name="schema"), name="docs"),
+    path('api/products/', include("products.urls")),
+    path('api/accounts/', include("accounts.urls")),
+] 
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+# if settings.DEBUG:
+#     import debug_toolbar
+
+#     urlpatterns = [path("__debug__/", include(debug_toolbar.urls)),] + urlpatterns
