@@ -6,7 +6,13 @@
     </div>
 </template>
 
-<script>
+<script setup>
+useHead({
+    title: 'Shakil Furniture | about',
+    meta: [
+        {name: 'description', content: 'A furniture website about page!'}
+    ]
+});
 
 </script>
 
