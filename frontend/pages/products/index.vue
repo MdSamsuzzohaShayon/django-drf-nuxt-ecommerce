@@ -9,7 +9,7 @@
 <script setup>
 definePageMeta({
     layout: 'products'
-})
+});
 
 </script>
 
