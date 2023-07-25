@@ -1,9 +1,6 @@
 <template>
     <div>
-        <h2>Product detail {{ id }}</h2>
-        <p>{{ product.title }}</p>
-        <p>{{ product.price }}</p>
-        <p>{{ product.id }}</p>
+        <ProductDetail v-bind:product="product" />
     </div>
 </template>
 
