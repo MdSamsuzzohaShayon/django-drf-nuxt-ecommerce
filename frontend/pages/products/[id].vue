@@ -1,15 +1,17 @@
 <template>
     <div>
         <h2>Product detail {{ id }}</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum culpa cupiditate fugit nisi alias officiis
-            eaque aliquid, minus architecto consectetur.</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum culpa cupiditate fugit nisi alias officiis
-            eaque aliquid, minus architecto consectetur.</p>
+        <p>{{ product.title }}</p>
+        <p>{{ product.price }}</p>
+        <p>{{ product.id }}</p>
     </div>
 </template>
 
 <script setup>
-const { id } = useRoute().params
+const { id } = useRoute().params;
+const uri = "http://localhost:8000/api/products/" + id + "/";
+const {data: product} = await useFetch(uri, {key: id});
+
 definePageMeta({
     layout: 'products'
 });

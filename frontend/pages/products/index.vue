@@ -1,8 +1,10 @@
 <template>
     <div>
-        <h2>Products</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum culpa cupiditate fugit nisi alias officiis eaque aliquid, minus architecto consectetur.</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum culpa cupiditate fugit nisi alias officiis eaque aliquid, minus architecto consectetur.</p>
+        <div class="grid grid-cols-4 gap-5">
+            <div v-for="p in products">
+                <NuxtLink v-bind:to="`/products/${p.id}/`">{{ p.title }}</NuxtLink>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -11,8 +13,7 @@ definePageMeta({
     layout: 'products'
 });
 
+const { data: products } = await useFetch('http://localhost:8000/api/products/')
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
