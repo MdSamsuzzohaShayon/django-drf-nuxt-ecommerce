@@ -34,6 +34,14 @@ class ProductListFilterView(generics.ListAPIView):
             filters_kwargs['category'] = category
         queryset = Product.objects.filter(**filters_kwargs)
         return queryset
+    
+
+class ProductsByCategory(generics.ListAPIView):
+    serializer_class = ProductSerializer
+    def get_queryset(self):
+        category = self.kwargs.get('catId')
+        queryset = Product.objects.filter(category = category)
+        return queryset
 
 
 class ProductCreateView(StaffEditorPermissionMixin, generics.CreateAPIView):

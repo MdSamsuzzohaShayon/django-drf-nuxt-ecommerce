@@ -7,6 +7,7 @@ interface MenuInterface {
 interface RightMenuInterface {
     id: number;
     name: string;
+    text: string;
     color: string;
 }
 

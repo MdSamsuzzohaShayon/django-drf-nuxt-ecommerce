@@ -5,10 +5,10 @@ interface ProductInterface {
     discount_price: number;
     total_stock: number;
     description: string;
-    image1: string;
-    image2: string;
-    image3: string;
-    image4: string;
+    image1: string | null;
+    image2: string | null;
+    image3: string | null;
+    image4: string | null;
     created_at: string;
     category: number
 }
