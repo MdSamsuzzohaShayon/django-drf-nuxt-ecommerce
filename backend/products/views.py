@@ -1,14 +1,40 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, filters
 from .models import Product, Category
 from .serializers import ProductSerializer, CategorySerializer, ProductUpdateSerializer, CategoryUpdateSerializer
 from accounts.mixins import StaffEditorPermissionMixin, GeneralUserPermissionMixin
 
 
 # Products
-class ProductListView(generics.ListAPIView):
+class ProductListSearchView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'description']
+
+class ProductListFilterView(generics.ListAPIView):
+    serializer_class = ProductSerializer
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        filters_kwargs = {}
+        title = self.request.query_params.get('title')
+        if title is not None:
+            filters_kwargs['title'] = title
+        price = self.request.query_params.get('price')
+        if price is not None:
+            filters_kwargs['price__lte'] = price
+        total_stock = self.request.query_params.get('total_stock')
+        if total_stock is True:
+            filters_kwargs['total_stock__gt'] = 0
+        category = self.request.query_params.get('category')
+        if category is not None:
+            filters_kwargs['category'] = category
+        queryset = Product.objects.filter(**filters_kwargs)
+        return queryset
+
 
 class ProductCreateView(StaffEditorPermissionMixin, generics.CreateAPIView):
     queryset = queryset = Product.objects.all()
