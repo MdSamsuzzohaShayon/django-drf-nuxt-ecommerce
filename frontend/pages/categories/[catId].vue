@@ -9,12 +9,10 @@
     </div>
 </template>
 
-<script setup>
-definePageMeta({
-    layout: 'products'
-});
-
-const { data: products } = await useFetch('http://localhost:8000/api/products/');
+<script setup lang="ts">
+import { ProductInterface } from '../../types/ProductType';
+// const { data: products } = await useFetch('http://localhost:8000/api/products/');
+const { data: products } = await useFetch<ProductInterface[]>(`${BACKEND_URL}/products/`);
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>

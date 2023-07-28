@@ -3,7 +3,7 @@
         <header class="shadow-sm bg-white">
             <div class="top-offer-menu bg-teal-300 w-full ">
                 <div class="container mx-auto px-2 py-2">
-                    <p>Free Delivery on orders over £120. Don’t miss discount.</p>
+                    <p class="text-xs">Free Delivery on orders over £120. Don’t miss discount.</p>
                 </div>
             </div>
             <div class="middle-social-menu bg-white text-teal-950 border-b border-teal-90">
@@ -21,11 +21,13 @@
                 <nav class=" w-1/3">
                     <ul class="flex justify-start list-none">
                         <li class="mr-4" v-for="menu in menus">
-                            <NuxtLink v-bind:to="menu.link">{{ menu.text }}</NuxtLink>
+                            <NuxtLink v-bind:to="menu.link" class="uppercase">{{ menu.text }}</NuxtLink>
                         </li>
                     </ul>
                 </nav>
-                <div class="flex justify-center w-1/3"><img v-bind:src="logoUrl" alt="" class="h-8"></div>
+                <div class="flex justify-center w-1/3">
+                    <NuxtLink to="/"><img v-bind:src="logoUrl" alt="" class="h-8"></NuxtLink>
+                </div>
                 <nav class="w-1/3">
                     <ul class="flex justify-end list-none" >
                         <li v-for="rm in rightMenus" class="ml-4">

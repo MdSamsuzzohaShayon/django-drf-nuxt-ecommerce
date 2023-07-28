@@ -9,12 +9,30 @@ const useSettingsStore = defineStore('settingsStore', {
             { id: 3, name: "bxl:instagram", color: 'black', link: '' },
         ] as SocialLinkInterface[],
         logoUrl: "/logo.png" as string,
+        siteTitle: "Shakil Furniture",
         newArrivals: [
             { id: 1, title: "Product 1", category: 1, description: "Desc", image1: "/img/bg-1.jpg" },
             { id: 2, title: "Product 2", category: 2, description: "Desc", image1: "/img/bg-2.jpg" },
             { id: 3, title: "Product 3", category: 1, description: "Desc", image1: "/img/bg-3.jpg" },
-        ] as NewArrivalInterface[]
-    })
+        ] as NewArrivalInterface[],
+        selectedProductId: 1 as number
+    }),
+    actions: {
+        changeSliderItem(isLeft: boolean){
+            const findProductIndex = this.newArrivals.findIndex(((p: NewArrivalInterface) => p.id === this.selectedProductId))
+            // console.log(findProductIndex);
+            if (findProductIndex === 0 || findProductIndex){
+                let changedProductIndex = isLeft ? findProductIndex + 1 : findProductIndex - 1
+                if (changedProductIndex < 0){
+                    changedProductIndex = this.newArrivals.length - 1
+                }else if (changedProductIndex >= this.newArrivals.length){
+                    changedProductIndex = 0;
+                }
+                this.selectedProductId = this.newArrivals[changedProductIndex].id
+                // console.log(this.selectedProductId)
+            }
+        }
+    }
 });
 
 export default useSettingsStore;
