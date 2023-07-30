@@ -13,6 +13,22 @@ interface ProductInterface {
     category: number
 }
 
+interface ProductFilterInterface {
+    title: string | null;
+    price: string | null;
+    total_stock: string | null;
+    category: number | null;
+}
+
+interface ProductFilterOptionalInterface {
+    title?: string;
+    price?: number;
+    total_stock?: number;
+    category?: number;
+}
+
 export {
-    ProductInterface
+    ProductInterface,
+    ProductFilterInterface,
+    ProductFilterOptionalInterface
 }

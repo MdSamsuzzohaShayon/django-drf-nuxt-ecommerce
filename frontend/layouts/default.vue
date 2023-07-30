@@ -33,6 +33,9 @@
                         <li v-for="rm in rightMenus" class="ml-4">
                             <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color" v-if="rm.id === 1"
                                 v-on:click.prevent="displaySearchBarHandler" />
+                            <NuxtLink v-bind:to="rm.link" v-else-if="rm.id === 3">
+                                <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color" />
+                            </NuxtLink>
                             <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color" v-else />
                         </li>
                     </ul>
@@ -108,6 +111,6 @@ const searchHandler = async (e: Event) => {
 defineExpose({ searchInputEl });
 
 watch(searchInputEl, (searchInputEl, prevSearchInputEl) => {
-    console.log({val: searchInputEl?.value, prevVal: prevSearchInputEl?.value});
+    console.log({ val: searchInputEl?.value, prevVal: prevSearchInputEl?.value });
 })
 </script>

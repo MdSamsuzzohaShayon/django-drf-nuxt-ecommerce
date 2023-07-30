@@ -9,11 +9,22 @@ const useElementStore = defineStore("elementsStore", {
             { id: 3, text: 'Contact', link: "/contact" },
         ] as MenuInterface[],
         rightMenus: [
-            { id: 1, name: "simple-line-icons:magnifier", text:"Search", color: 'black'},
-            { id: 2, name: "simple-line-icons:basket", text:"Cart", color: 'black'},
-            { id: 3, name: "simple-line-icons:user", text:"User Account", color: 'black'},
-        ] as RightMenuInterface[]
+            { id: 1, name: "simple-line-icons:magnifier", text:"Search", color: 'black', link: '#'},
+            { id: 2, name: "simple-line-icons:basket", text:"Cart", color: 'black', link: '/cart'},
+            { id: 3, name: "simple-line-icons:user", text:"User Account", color: 'black', link: '/user/signup'},
+        ] as RightMenuInterface[],
+        isLoading: false as boolean,
+        showFilter: false as boolean
     }),
+    actions: {
+        openFilterBar(){
+            this.showFilter = true;
+        },
+        closeFilterBar(){
+            this.showFilter = false;
+        },
+
+    }
 });
 
 export default useElementStore;

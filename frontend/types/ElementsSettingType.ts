@@ -9,6 +9,7 @@ interface RightMenuInterface {
     name: string;
     text: string;
     color: string;
+    link: string;
 }
 
 
