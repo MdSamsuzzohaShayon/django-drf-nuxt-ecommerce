@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { UserSignupInterface } from '../types/UserType';
+import { UserSignupInterface, UserSigninInterface } from '../types/UserType';
 
 const useUserStore = defineStore('userStore', {
     state: () => ({
@@ -10,6 +10,10 @@ const useUserStore = defineStore('userStore', {
             password: '',
             confirm_password: '',
         } as UserSignupInterface,
+        userSignin: {
+            email: '',
+            password: '',
+        } as UserSigninInterface,
     }),
     getters: {
         serializedUserSignup(state): UserSignupInterface | null {
@@ -28,8 +32,27 @@ const useUserStore = defineStore('userStore', {
                     userSignupData[k as keyof UserSignupInterface] = v;
                 }
             }
+            if (userSignupData.password !== userSignupData.confirm_password) {
+                isValid = false;
+            }
             if (isValid) return userSignupData;
-            return null
+            return null;
+        },
+        serializedUserSignin(state): UserSigninInterface | null {
+            const userSigninData: UserSigninInterface = {
+                email: '',
+                password: '',
+            }
+            let isValid = true;
+            for (const [k, v] of Object.entries(state.userSignin)) {
+                if (v === '' || v === undefined || v === null) {
+                    isValid = false;
+                } else {
+                    userSigninData[k as keyof UserSigninInterface] = v;
+                }
+            }
+            if (isValid) return userSigninData;
+            return null;
         }
     }
 });

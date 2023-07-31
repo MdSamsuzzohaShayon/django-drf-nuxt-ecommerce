@@ -58,6 +58,7 @@ class VerifySignupView(GenericAPIView):
     def put(self, request, token):
         try:
             decoded_token = jwt.decode(token, os.getenv('JSON_TOKEN_SECRET'), algorithms=["HS256"])
+            print("D Token -> ", decoded_token)
             if decoded_token['type'] != TokenTypes.REGISTER.value:
                 return Response({'message': 'Invalid token'}, status=status.HTTP_406_NOT_ACCEPTABLE)                 
             
@@ -73,6 +74,7 @@ class VerifySignupView(GenericAPIView):
         except jwt.exceptions.ExpiredSignatureError:
             return Response({'message': 'The token had been expired'}, status=status.HTTP_406_NOT_ACCEPTABLE) 
         except Exception as e:
+            print("Error")
             logging.error(e)
             return Response({'message': str(e)}, status=status.HTTP_406_NOT_ACCEPTABLE)  
         

@@ -1,13 +1,13 @@
 <template>
     <div>
-        Category
+        Orders
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

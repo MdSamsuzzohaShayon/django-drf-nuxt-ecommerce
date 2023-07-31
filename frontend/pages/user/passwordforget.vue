@@ -1,6 +1,6 @@
 <template>
     <div>
-        Category
+        Password forget
     </div>
 </template>
 
