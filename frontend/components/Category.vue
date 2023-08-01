@@ -22,6 +22,4 @@ import useCategoryStore from '../stores/CategoryStore';
 // https://dev.to/rafaelmagalhaes/pinia-and-nuxt-3-4ij5
 const categoryStore = useCategoryStore();
 const { categoryList } = storeToRefs(categoryStore);
-await categoryStore.fetchCategories();
-
 </script>

@@ -27,8 +27,7 @@
       ],
       "@/*": [
         "./*"
-      ]
-    },
+      ]},
     "types": [
       "@nuxt/types",
       "@nuxt/typescript-build",

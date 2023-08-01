@@ -26,13 +26,26 @@ class ProductListFilterView(generics.ListAPIView):
         price = self.request.query_params.get('price')
         if price is not None:
             filters_kwargs['price__lte'] = price
-        total_stock = self.request.query_params.get('total_stock')
-        if total_stock is True:
-            filters_kwargs['total_stock__gt'] = 0
+        if self.request.query_params.get('total_stock'):
+            total_stock = int(self.request.query_params.get('total_stock'))
+            # if total_stock is True:
+            #     filters_kwargs['total_stock__gt'] = 0
+            if total_stock == 0 or total_stock < 0:
+                filters_kwargs['total_stock__lte'] = total_stock
+            else:
+                filters_kwargs['total_stock__gt'] = 0
         category = self.request.query_params.get('category')
         if category is not None:
             filters_kwargs['category'] = category
         queryset = Product.objects.filter(**filters_kwargs)
+        return queryset
+    
+
+class ProductsByCategory(generics.ListAPIView):
+    serializer_class = ProductSerializer
+    def get_queryset(self):
+        category = self.kwargs.get('catId')
+        queryset = Product.objects.filter(category = category)
         return queryset
 
 

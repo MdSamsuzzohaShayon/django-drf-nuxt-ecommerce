@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        Password forget
     </div>
 </template>
 

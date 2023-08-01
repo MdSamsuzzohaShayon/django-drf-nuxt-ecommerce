@@ -15,7 +15,8 @@ const useSettingsStore = defineStore('settingsStore', {
             { id: 2, title: "Product 2", category: 2, description: "Desc", image1: "/img/bg-2.jpg" },
             { id: 3, title: "Product 3", category: 1, description: "Desc", image1: "/img/bg-3.jpg" },
         ] as NewArrivalInterface[],
-        selectedProductId: 1 as number
+        selectedProductId: 1 as number,
+        heightProductPrice: 10000 as number
     }),
     actions: {
         changeSliderItem(isLeft: boolean){

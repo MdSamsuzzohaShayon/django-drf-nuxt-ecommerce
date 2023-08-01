@@ -48,7 +48,7 @@ class IsStaffEditorPermission(permissions.DjangoModelPermissions):
     
 class IsGeneralUserPermission(permissions.DjangoModelPermissions):
     def has_permission(self, request, view):
-        print(request.user.get_all_permissions())
+        # print(request.user.get_all_permissions())
         if request.user.is_active:
             return True
         return False

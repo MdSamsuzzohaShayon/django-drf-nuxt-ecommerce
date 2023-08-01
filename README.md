@@ -4,6 +4,8 @@
 
 ### Instructions
  - Create a table with all single data staff of the website such as logo, title, background image, offer, description, and more
+ - Create a table for address
+ - Make a loader in frontend to fetch data
  - On delete product or category, images should be deleted from the folder too
  - customize django rest framework user password validation
  - Add first name, last name for user
@@ -66,10 +68,12 @@
 
 ### Inspirations
  - Design -> https://99grid.com/ , https://demo.minimog.co/ , 
- - django-rest-framework-json-api - https://github.com/django-json-api/django-rest-framework-json-api
  - ecommerce_api - https://github.com/thomas545/ecommerce_api
  - django-ecommerce-api - https://github.com/earthcomfy/django-ecommerce-api/tree/master
  - store-engine - https://github.com/open-ecommerce-api/store-engine/tree/develop
+ - The original headless storefront theme for Swell (Nuxt/Vue) - https://github.com/swellstores/origin-theme/tree/master
+ - Nuxt 3 and Vue 3 headless eCommerce site with WooCommerce backend and Algolia search - https://github.com/w3bdesign/nuxtjs-woocommerce/tree/master
+ - The project utilizes Nuxt3 to create a scalable, efficient, and modern web application. - https://github.com/TutorFx/nuxt3-ecommerce
 
  - Left at __https://www.youtube.com/watch?v=ktuOUaOyMmo&list=PLOLrQ9Pn6cawinBJbH5d9IfloO9RRPMiq&index=31__
 
