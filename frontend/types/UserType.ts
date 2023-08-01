@@ -11,7 +11,19 @@ interface UserSignupInterface extends UserSigninInterface{
     confirm_password: string;
 }
 
+interface UserInfoInterface{
+    id: number | null;
+    email: string | null;
+    first_name: string | null;
+    last_name: string | null;
+    is_admin: boolean | null;
+    is_validated: boolean | null;
+    is_staff: boolean | null;
+    is_active: boolean | null;
+}
+
 export {
     UserSignupInterface,
-    UserSigninInterface
+    UserSigninInterface,
+    UserInfoInterface
 }

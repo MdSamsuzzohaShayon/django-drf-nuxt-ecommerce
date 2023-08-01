@@ -4,15 +4,17 @@ import logging
 
 from datetime import datetime, timedelta
 
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.generics import CreateAPIView, GenericAPIView
+from rest_framework.generics import CreateAPIView, GenericAPIView, RetrieveAPIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import SignupSerializer, PasswordForgotSerializer, PasswordResetSerializer, CustomTokenObtainPairSerializer
+from .serializers import SignupSerializer, PasswordForgotSerializer, PasswordResetSerializer, CustomTokenObtainPairSerializer, UserSerializer
 from .models import User
 from . import emails
 from drfecom.keys import TokenTypes
+from .mixins import GeneralUserPermissionMixin
 
 """
 Used for create-only endpoints. Provides a post method handler.
@@ -58,7 +60,6 @@ class VerifySignupView(GenericAPIView):
     def put(self, request, token):
         try:
             decoded_token = jwt.decode(token, os.getenv('JSON_TOKEN_SECRET'), algorithms=["HS256"])
-            print("D Token -> ", decoded_token)
             if decoded_token['type'] != TokenTypes.REGISTER.value:
                 return Response({'message': 'Invalid token'}, status=status.HTTP_406_NOT_ACCEPTABLE)                 
             
@@ -113,6 +114,28 @@ class PasswordResetView(GenericAPIView):
 
 class SigninTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+
+
+class UserObtainView(GeneralUserPermissionMixin, RetrieveAPIView):
+    serializer_class = UserSerializer
+
+
+    # def get(self, request, *args, **kwargs):
+    #     print(request.headers['Authorization'].split(' ')[1])
+    #     decoded_token = jwt.decode(request.headers['Authorization'].split(' ')[1], os.getenv('JSON_TOKEN_SECRET'), algorithms=["HS256"])
+    #     user_instance = User.objects.filter(id =decoded_token['user_id'])
+    #     return Response({'user': user_instance}, status=status.HTTP_200_OK)
+    
+    def get_queryset(self):
+        decoded_token = jwt.decode(self.request.headers['Authorization'].split(' ')[1], os.getenv('JSON_TOKEN_SECRET'), algorithms=["HS256"])
+        queryset = User.objects.filter(id =decoded_token['user_id'])
+        return queryset
+    
+    def get_object(self):
+        queryset = self.get_queryset()
+        filter = {}
+        obj = get_object_or_404(queryset, **filter)
+        return obj
 
 
 

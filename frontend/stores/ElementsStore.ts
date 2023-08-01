@@ -11,7 +11,7 @@ const useElementStore = defineStore("elementsStore", {
         rightMenus: [
             { id: 1, name: "simple-line-icons:magnifier", text: "Search", color: 'black', link: '#' },
             { id: 2, name: "simple-line-icons:basket", text: "Cart", color: 'black', link: '/cart' },
-            { id: 3, name: "simple-line-icons:user", text: "User Account", color: 'black', link: '/user/signup' },
+            { id: 3, name: "simple-line-icons:user", text: "User Account", color: 'black', link: '/user/signin' },
         ] as RightMenuInterface[],
         errorMessageList: [] as string[],
         successMessageList: [] as string[],

@@ -19,13 +19,15 @@ The following example demonstrates how you might handle creating a user with a n
 .create() and .update() - Override either or both of these to support saving instances.
 """
 class SignupSerializer(serializers.Serializer):
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True) # need to validate by external validators , validators=[validate_password]
     confirm_password = serializers.CharField(write_only=True)
 
     # To do any other validation that requires access to multiple fields, add a method called .validate()
     def validate(self, data):
-        print("validate", data)
+        # print("validate", data)
         password = data.get('password')
         confirm_password = data.pop('confirm_password')
         if password != confirm_password:
@@ -49,6 +51,10 @@ class SignupSerializer(serializers.Serializer):
         instance.save()
         return instance
     
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'first_name', 'last_name', 'is_admin', 'is_validated', 'is_admin', 'is_staff', 'is_active']    
 
 
 class PasswordForgotSerializer(serializers.Serializer):

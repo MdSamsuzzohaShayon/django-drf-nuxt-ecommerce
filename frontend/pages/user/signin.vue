@@ -30,10 +30,16 @@ import { storeToRefs } from 'pinia';
 import useUserStore from '../../stores/UserStore';
 import useElementStore from '../../stores/ElementsStore';
 
+const oneDayInSeconds = 24 * 60 * 60; // 1 day = 24 hours * 60 minutes * 60 seconds
+
+
+
+
+
 const userStore = useUserStore();
 const elementStore = useElementStore();
 
-const { userSignin } = storeToRefs(userStore);
+const { userSignin, isAuthenticated } = storeToRefs(userStore);
 const { errorMessageList, successMessageList } = storeToRefs(elementStore);
 
 
@@ -50,7 +56,12 @@ const signinHandler = async (e: Event) => {
         console.log({ data: data.value, pending: pending.value, error: error.value, refresh: refresh, status: status.value });
         if (data.value) {
             if (status.value === 'success') {
-                window.localStorage.setItem("token", JSON.stringify(data.value));
+                const token = useCookie("token", {
+                    maxAge: MAX_SIGNIN_COOKIE_AGE,
+                    // httpOnly: true, // On https protocal, Need to set by server 
+                });
+                token.value = JSON.stringify(data.value);
+                // document.cookie
                 await navigateTo("/user/dashboard/");
             } else {
                 elementStore.setErrorMessageList(Object.values(data.value));
@@ -67,6 +78,13 @@ const signinHandler = async (e: Event) => {
         elementStore.setErrorMessageList(["Invalid data!"]);
     }
 }
+
+
+onMounted(()=>{
+    if(isAuthenticated){
+        navigateTo('/user/dashboard/');
+    }
+});
 </script>
 
 <style scoped></style>

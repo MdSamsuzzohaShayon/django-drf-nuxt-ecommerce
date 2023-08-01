@@ -48,6 +48,8 @@ class UserManager(BaseUserManager):
 
 # Create your models here.
 class User(AbstractUser):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     email = models.CharField(max_length=40, unique=True)
     is_validated = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
