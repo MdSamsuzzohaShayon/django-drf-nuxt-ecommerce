@@ -82,7 +82,7 @@ const signupHandler = async (e: Event) => {
 }
 
 onMounted(()=>{
-    if(isAuthenticated){
+    if(isAuthenticated.value === true){
         navigateTo('/user/dashboard/');
     }
 });

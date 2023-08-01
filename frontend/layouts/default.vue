@@ -23,7 +23,7 @@
             <div class="bottom-main-menu container mx-auto px-2 py-6 flex justify-between">
                 <nav class=" w-1/3">
                     <ul class="flex justify-start list-none">
-                        <li class="mr-4" v-for="menu in menus">
+                        <li class="mr-4 cursor-pointer" v-for="menu in menus">
                             <NuxtLink v-bind:to="menu.link" class="uppercase">{{ menu.text }}</NuxtLink>
                         </li>
                     </ul>
@@ -33,13 +33,17 @@
                 </div>
                 <nav class="w-1/3">
                     <ul class="flex justify-end list-none">
-                        <li v-for="rm in rightMenus" class="ml-4">
+                        <li v-for="rm in rightMenus" class="ml-4 cursor-pointer">
                             <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color" v-if="rm.id === 1"
                                 v-on:click.prevent="displaySearchBarHandler" />
+                            <NuxtLink v-bind:to="rm.link" v-else-if="rm.id === 2" class="cursor-pointer">
+                                <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color" />
+                            </NuxtLink>
                             <NuxtLink v-bind:to="rm.link" v-else-if="rm.id === 3">
                                 <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color" />
                             </NuxtLink>
-                            <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color" v-else />
+                            <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color"
+                                v-else-if="rm.id === 4 && isAuthenticated === true" v-on:click.prevent="logoutHandler" />
                         </li>
                     </ul>
                 </nav>
@@ -107,6 +111,16 @@ const displaySearchBarHandler = (e: Event) => {
 const searchHandler = async (e: Event) => {
     showSearchBar.value = !showSearchBar.value;
     await navigateTo(`/search/?q=${state.q}`);
+}
+
+
+const logoutHandler = async (e: Event) => {
+    // Delete cookie
+    const token = useCookie('token');
+    token.value = null;
+    userStore.setIsAuthenticated(false);
+    // Redirect to home
+    await navigateTo('/');
 }
 
 defineExpose({ searchInputEl });

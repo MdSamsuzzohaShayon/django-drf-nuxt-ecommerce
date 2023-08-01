@@ -25,6 +25,7 @@ const useUserStore = defineStore('userStore', {
             is_staff: null,
             is_active: null,
         } as UserInfoInterface,
+        userList: [] as UserInfoInterface[]
     }),
     actions: {
         setIsAuthenticated(isAuthenticated: boolean) {
@@ -63,6 +64,20 @@ const useUserStore = defineStore('userStore', {
             if (userStatus.value === 'success') {
                 this.isAuthenticated = true;
                 this.userInfo = userInfo.value;
+            }
+        },
+        async fetchAllUser(accessToken: string) {
+            // accounts/list/
+            const { data: userList, error: userError, refresh: refreshRequest, status: userStatus } = await useFetch<UserInfoInterface[]>(`${BACKEND_URL}/accounts/list/`, {
+                key: `${new Date().getSeconds()}`,
+                headers: {
+                    "Authorization": `Bearer ${accessToken}`
+                }
+            });
+            await refreshRequest();
+            console.log({ "Error ": userError.value, "Status": userStatus.value, "data": userList.value });
+            if (userStatus.value === 'success') {
+                this.userList = userList.value;
             }
         }
     },

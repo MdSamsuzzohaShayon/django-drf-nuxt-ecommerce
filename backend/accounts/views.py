@@ -7,14 +7,14 @@ from datetime import datetime, timedelta
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.generics import CreateAPIView, GenericAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, GenericAPIView, RetrieveAPIView, ListAPIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import SignupSerializer, PasswordForgotSerializer, PasswordResetSerializer, CustomTokenObtainPairSerializer, UserSerializer
 from .models import User
 from . import emails
 from drfecom.keys import TokenTypes
-from .mixins import GeneralUserPermissionMixin
+from .mixins import GeneralUserPermissionMixin, IsStaffEditorPermission
 
 """
 Used for create-only endpoints. Provides a post method handler.
@@ -136,6 +136,11 @@ class UserObtainView(GeneralUserPermissionMixin, RetrieveAPIView):
         filter = {}
         obj = get_object_or_404(queryset, **filter)
         return obj
+    
+class UserListView(IsStaffEditorPermission, ListAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    
 
 
 

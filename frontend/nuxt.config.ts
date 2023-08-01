@@ -25,5 +25,13 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
     }
-  }
+  },
+  components: [
+    { path: '~/components/product', extensions: ['vue']},
+    { path: '~/components/category', extensions: ['vue']},
+    { path: '~/components/order', extensions: ['vue']},
+    { path: '~/components/setting', extensions: ['vue']},
+    { path: '~/components/user', extensions: ['vue']},
+    '~/components'
+  ]
 })
