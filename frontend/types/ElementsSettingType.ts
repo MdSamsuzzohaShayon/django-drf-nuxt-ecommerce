@@ -13,7 +13,7 @@ interface RightMenuInterface {
 }
 
 
-interface DashboardSidebarMenuInterface {
+interface SidebarMenuInterface {
     id: number;
     name: string;
     text: string;
@@ -22,5 +22,5 @@ interface DashboardSidebarMenuInterface {
 export {
     MenuInterface,
     RightMenuInterface,
-    DashboardSidebarMenuInterface
+    SidebarMenuInterface
 };

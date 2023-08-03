@@ -2,11 +2,11 @@
     <div>
         <header class="shadow-sm bg-white">
             <!-- MENU: 1 -> Top offer menu  -->
-            <div class="top-offer-menu bg-teal-300 w-full ">
+            <!-- <div class="top-offer-menu bg-teal-300 w-full ">
                 <div class="container mx-auto px-2 py-2">
                     <p class="text-xs">Free Delivery on orders over £120. Don’t miss discount.</p>
                 </div>
-            </div>
+            </div> -->
             <!-- MENU: 2 -> Middle social menu  -->
             <div class="middle-social-menu bg-white text-teal-950 border-b border-teal-90">
                 <div class="container mx-auto px-2 py-2">

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { MenuInterface, RightMenuInterface, DashboardSidebarMenuInterface } from "types/ElementsSettingType";
+import { MenuInterface, RightMenuInterface, SidebarMenuInterface } from "types/ElementsSettingType";
 
 const useElementStore = defineStore("elementsStore", {
     state: () => ({
@@ -20,7 +20,11 @@ const useElementStore = defineStore("elementsStore", {
             { id: 3, name: "et:gears", text: "Setting" },
             { id: 4, name: "simple-line-icons:handbag", text: "Order" },
             { id: 5, name: "simple-line-icons:user", text: "User" },
-        ] as DashboardSidebarMenuInterface[],
+        ] as SidebarMenuInterface[],
+        userDashboardSidebar: [
+            { id: 1, name: "simple-line-icons:user", text: "Profile" },
+            { id: 2, name: "simple-line-icons:handbag", text: "Order" },
+         ] as SidebarMenuInterface[],
         selectedDSID: 1 as number, // DSI = Dashboard Sidebar ID
         errorMessageList: [] as string[],
         successMessageList: [] as string[],

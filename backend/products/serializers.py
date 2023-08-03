@@ -21,13 +21,8 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class ProductUpdateSerializer(serializers.ModelSerializer):
     
-    # id = serializers.SerializerMethodField(read_only=True)
     title = serializers.CharField(read_only=True)
-    # price = serializers.DecimalField(max_digits=10, decimal_places=0)
-    # discount_price = serializers.DecimalField(max_digits=10, decimal_places=0)
-    # price = serializers.DecimalField(max_digits=10, decimal_places=0)
     discount_price = serializers.DecimalField(max_digits=10, decimal_places=0, required=False)
-    # # image_list = models.CharField # Make one to many relationship
     total_stock = serializers.DecimalField(max_digits=10, decimal_places=0, required=False)
     description = serializers.CharField(required=False)
     # category = TreeForeignKey(

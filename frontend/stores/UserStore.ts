@@ -61,7 +61,7 @@ const useUserStore = defineStore('userStore', {
             await refreshRequest();
             console.log({ "Error ": userError.value, "Status": userStatus.value, "data": userInfo.value });
 
-            if (userStatus.value === 'success') {
+            if (userStatus.value === 'success' && userInfo.value) {
                 this.isAuthenticated = true;
                 this.userInfo = userInfo.value;
             }
@@ -76,7 +76,7 @@ const useUserStore = defineStore('userStore', {
             });
             await refreshRequest();
             console.log({ "Error ": userError.value, "Status": userStatus.value, "data": userList.value });
-            if (userStatus.value === 'success') {
+            if (userStatus.value === 'success' &&  userList.value) {
                 this.userList = userList.value;
             }
         }

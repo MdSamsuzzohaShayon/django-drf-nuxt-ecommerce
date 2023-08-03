@@ -48,18 +48,24 @@ import { storeToRefs } from 'pinia';
 
 import useUserStore from '../../stores/UserStore';
 import useElementStore from '../../stores/ElementsStore';
+import useProductStore from '../../stores/ProductStore';
 
 const userStore = useUserStore();
 const elementStore = useElementStore();
+const productsStore = useProductStore();
 
 const { isAuthenticated } = storeToRefs(userStore);
 const { dashboardSidebar, selectedDSID, errorMessageList, successMessageList } = storeToRefs(elementStore);
 
 
-onMounted(() => {
+onMounted(async () => {
     if (isAuthenticated.value === false) {
         // Check role
         navigateTo('/admin/signin/');
+    }else{
+        const fetchAtBeginning = [];
+        fetchAtBeginning.push(productsStore.fetchProducts());
+        await Promise.all(fetchAtBeginning);
     }
 });
 </script>

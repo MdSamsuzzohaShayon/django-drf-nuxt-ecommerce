@@ -1,6 +1,6 @@
 // const { data: products } = await useFetch('http://localhost:8000/api/products/');
 import { defineStore } from "pinia";
-import { ProductInterface, ProductFilterInterface, ProductFilterOptionalInterface } from '../types/ProductType';
+import { ProductInterface, ProductFilterInterface, ProductFilterOptionalInterface, ProductBaseInterface } from '../types/ProductType';
 
 const useProductStore = defineStore('productStore', {
     state: () => ({
@@ -11,15 +11,49 @@ const useProductStore = defineStore('productStore', {
             total_stock: null,
             category: null
         } as ProductFilterInterface,
+        productUpdateAdd: {
+            title: '',
+            price: 0,
+            discount_price: 0,
+            total_stock: 0,
+            description: '',
+            category: 1,
+        } as ProductBaseInterface,
+        productUpdate: false as boolean,
+        // selectProductToUpdate: {} as ProductInterface,
+        // productPropsToUpdate: {}
     }),
     actions: {
-        async fetchProducts(q: string | null) {
-            let url = `${BACKEND_URL}/products/`;
-            if (q !== null || q !== '') {
-                url = `${BACKEND_URL}/products/?search=${q}`;
+        setProductUpdate(update: boolean) {
+            this.productUpdate = update;
+        },
+        setProductToUpdate(pId: number) {
+            const findProduct = this.productList.find((p: ProductInterface) => p.id === pId);
+            if (findProduct) {
+                this.productUpdateAdd = findProduct;
             }
-            const { data: products } = await useFetch<ProductInterface[]>(url);
-            if (products.value) {
+        },
+        addNewProduct(newProduct: ProductInterface) {
+            this.productList.push(newProduct);
+        },
+        setUpdateProduct(pId: number) {
+            const findProductIndex = this.productList.findIndex((p: ProductInterface) => p.id === pId);
+            // When specific item is not found
+            if (findProductIndex === -1) {
+                return;
+            }
+            // update object
+            const updatedObj = { ...this.productList[findProductIndex], ...this.productUpdateAdd };
+            this.productList[findProductIndex] = updatedObj;
+        },
+        async fetchProducts(q: string | null = null) {
+            let url = `${BACKEND_URL}/products/`;
+            if (q !== null && q !== '') {
+                url += `?search=${q}`;
+            }
+            const { data: products, status: productStatus, refresh: refreshFetch } = await useFetch<ProductInterface[]>(url);
+            await refreshFetch();
+            if (productStatus.value === 'success' && products.value) {
                 this.productList = products.value;
             }
         },

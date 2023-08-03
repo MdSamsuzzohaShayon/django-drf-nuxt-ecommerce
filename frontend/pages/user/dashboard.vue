@@ -3,7 +3,7 @@
         <div class="flex justify-between">
             <div class="left-side bar w-2/12">
                 <ul class="h-screen w-full bg-teal-100 h-screen">
-                    <li v-for="dsi in dashboardSidebar" v-on:click.prevent="elementStore.changeDSID(dsi.id)"
+                    <li v-for="dsi in userDashboardSidebar" v-on:click.prevent="elementStore.changeDSID(dsi.id)"
                         class="bg-teal-700 border-1 border-teal-950 text-teal-100 flex justify-start items-ceonter gap-2 p-2 cursor-pointer">
                         <Icon v-bind:name="dsi.name" size="20" />
                         <p class="capitalize">{{ dsi.text }}</p>
@@ -17,7 +17,7 @@
                     <!-- Change address  -->
                     <!-- Change phone number  -->
                 </div>
-                <div class="selected-item" v-else-if="selectedDSID === 4">
+                <div class="selected-item" v-else-if="selectedDSID === 2">
                     <h2>Order</h2>
                     <OrderDetail />
                     <OrderList />
@@ -37,7 +37,7 @@ const userStore = useUserStore();
 const elementStore = useElementStore();
 
 const { isAuthenticated } = storeToRefs(userStore);
-const { dashboardSidebar, selectedDSID } = storeToRefs(elementStore);
+const { userDashboardSidebar, selectedDSID } = storeToRefs(elementStore);
 
 
 onMounted(() => {

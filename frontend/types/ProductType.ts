@@ -1,16 +1,19 @@
-interface ProductInterface {
+interface ProductBaseInterface {
     id: number;
     title: string;
     price: number;
     discount_price: number;
     total_stock: number;
     description: string;
+    category: number
+}
+
+interface ProductInterface extends ProductBaseInterface{
     image1: string | null;
     image2: string | null;
     image3: string | null;
     image4: string | null;
     created_at: string;
-    category: number
 }
 
 interface ProductFilterInterface {
@@ -28,6 +31,7 @@ interface ProductFilterOptionalInterface {
 }
 
 export {
+    ProductBaseInterface,
     ProductInterface,
     ProductFilterInterface,
     ProductFilterOptionalInterface
