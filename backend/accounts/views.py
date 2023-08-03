@@ -14,7 +14,7 @@ from .serializers import SignupSerializer, PasswordForgotSerializer, PasswordRes
 from .models import User
 from . import emails
 from drfecom.keys import TokenTypes
-from .mixins import GeneralUserPermissionMixin, IsStaffEditorPermission
+from .mixins import GeneralUserPermissionMixin, StaffEditorPermissionMixin
 
 """
 Used for create-only endpoints. Provides a post method handler.
@@ -144,11 +144,11 @@ class UserUpdateView( GeneralUserPermissionMixin, UpdateAPIView):
     def perform_update(self, serializer):
         user = self.get_object()
         address_data = self.request.data.get('address', {})
-        print("Address -> ",address_data)
+        # print("Address -> ",address_data)
 
         instance = serializer.save()
 
-        print("perform_update -> UserUpdateView", user.id)
+        # print("perform_update -> UserUpdateView", user.id)
         address_data['user'] = user.id
 
         # Update or create address
@@ -166,7 +166,7 @@ class UserUpdateView( GeneralUserPermissionMixin, UpdateAPIView):
         address_serializer.is_valid(raise_exception=True)
         address_serializer.save()
     
-class UserListView(IsStaffEditorPermission, ListAPIView):
+class UserListView(StaffEditorPermissionMixin, ListAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     
