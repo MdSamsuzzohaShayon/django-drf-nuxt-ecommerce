@@ -1,6 +1,6 @@
 // const { data: products } = await useFetch('http://localhost:8000/api/products/');
 import { defineStore } from "pinia";
-import { ProductInterface, ProductFilterInterface, ProductFilterOptionalInterface, ProductBaseInterface } from '../types/ProductType';
+import { ProductInterface, ProductFilterInterface, ProductFilterOptionalInterface, ProductBaseInterface, CartItemInterface } from '../types/ProductType';
 
 const useProductStore = defineStore('productStore', {
     state: () => ({
@@ -22,6 +22,9 @@ const useProductStore = defineStore('productStore', {
         productUpdate: false as boolean,
         // selectProductToUpdate: {} as ProductInterface,
         // productPropsToUpdate: {}
+
+        // Cart
+        cartList: [] as CartItemInterface[]
     }),
     actions: {
         setProductUpdate(update: boolean) {
@@ -45,6 +48,32 @@ const useProductStore = defineStore('productStore', {
             // update object
             const updatedObj = { ...this.productList[findProductIndex], ...this.productUpdateAdd };
             this.productList[findProductIndex] = updatedObj;
+        },
+        addItemToCart(cartItem: CartItemInterface) {
+            const prevCart = window.localStorage.getItem("cart");
+            let cartObj = []
+            if (prevCart) {
+                cartObj = JSON.parse(prevCart);
+            }
+            cartObj.push(cartItem);
+            window.localStorage.setItem('cart', JSON.stringify(cartObj));
+            this.cartList = cartObj;
+        },
+        removeItemFromCart(cId: string) {
+            const prevCart = window.localStorage.getItem("cart");
+            let cartObj: CartItemInterface[] = []
+            if (prevCart) {
+                cartObj = JSON.parse(prevCart);
+            }
+            cartObj = cartObj.filter((c: CartItemInterface) => c.id !== cId);
+            window.localStorage.setItem('cart', JSON.stringify(cartObj));
+            this.cartList = cartObj;
+        },
+        fetchCartFromLocalStorage() {
+            const prevCart = window.localStorage.getItem('cart');
+            if (prevCart) {
+                this.cartList = JSON.parse(prevCart);
+            }
         },
         async fetchProducts(q: string | null = null) {
             let url = `${BACKEND_URL}/products/`;
@@ -72,6 +101,10 @@ const useProductStore = defineStore('productStore', {
         },
     },
     getters: {
+        getCartById(state){
+            // return (userId) => state.users.find((user) => user.id === userId)
+            return (cId: string) => state.cartList.find((c) => c.id === cId);
+        },
         sereliazedProductFilter(state): ProductFilterOptionalInterface {
             const newObj: ProductFilterOptionalInterface = {}
             // state.productFilter

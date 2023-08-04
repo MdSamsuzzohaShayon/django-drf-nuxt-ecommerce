@@ -8,8 +8,8 @@ interface ProductBaseInterface {
     category: number
 }
 
-interface ProductInterface extends ProductBaseInterface{
-    image1: string | null;
+interface ProductInterface extends ProductBaseInterface {
+    image1: string;
     image2: string | null;
     image3: string | null;
     image4: string | null;
@@ -30,9 +30,16 @@ interface ProductFilterOptionalInterface {
     category?: number;
 }
 
+interface CartItemInterface {
+    id: string;
+    pId: number;
+    qty: number;
+}
+
 export {
     ProductBaseInterface,
     ProductInterface,
     ProductFilterInterface,
-    ProductFilterOptionalInterface
+    ProductFilterOptionalInterface,
+    CartItemInterface
 }

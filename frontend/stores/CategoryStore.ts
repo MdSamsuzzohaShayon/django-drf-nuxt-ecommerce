@@ -7,7 +7,7 @@ const useCategoryStore = defineStore('categoryStore', {
     }),
     actions: {
         async fetchCategories() {
-            const { data: productCategories, refresh: refreshRequest } = await useFetch<ProductCategoryInterface[]>(`${BACKEND_URL}/products/categories/`);
+            const { data: productCategories, refresh: refreshRequest } = await useFetch<ProductCategoryInterface[]>(`${BACKEND_URL}/products/categories/list/`);
             await refreshRequest();
             console.log(productCategories.value);
 

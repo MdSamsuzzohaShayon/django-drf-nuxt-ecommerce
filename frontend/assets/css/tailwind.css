@@ -29,3 +29,14 @@ body {
         @apply p-3 rounded-md bg-white shadow-md h-full;
     }
 }
+
+
+
+.remove-arrow::-webkit-inner-spin-button,
+.remove-arrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.remove-arrow {
+    -moz-appearance: textfield;
+}

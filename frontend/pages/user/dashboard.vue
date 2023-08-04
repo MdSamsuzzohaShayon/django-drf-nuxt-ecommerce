@@ -32,13 +32,21 @@ import { storeToRefs } from 'pinia';
 
 import useUserStore from '../../stores/UserStore';
 import useElementStore from '../../stores/ElementsStore';
+import useOrderStore from '../../stores/OrderStore';
 
 const userStore = useUserStore();
 const elementStore = useElementStore();
+const orderStore = useOrderStore();
 
 const { isAuthenticated } = storeToRefs(userStore);
 const { userDashboardSidebar, selectedDSID } = storeToRefs(elementStore);
 
+const token = useCookie("token");
+if(token.value){
+    // @ts-ignore
+    const { access } = token.value;
+    await orderStore.fetchOrders(access);
+}
 
 onMounted(() => {
     if (isAuthenticated.value === false) {

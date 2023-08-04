@@ -18,6 +18,14 @@
  - One customer dashboard
  - Save tokens in client side cookies
 
+### BKash API
+ - BKash overview - https://www.youtube.com/watch?v=i8TT8-DAF5Q
+ - Code - https://www.youtube.com/watch?v=B4xM7rBk2R8&list=PLD11cPzGpfKT1o2OTydIecmyHII5tZl_F&index=2
+ - Need a merchant account
+ - Request a new product
+ - Tokenized checkout overflow - https://developer.bka.sh/docs/tokenized-checkout-overview
+ - Token Management Overview - https://developer.bka.sh/docs/token-management-overview-3
+
 ### Deployment
  - Docarize the application
  - Setup postgres database
