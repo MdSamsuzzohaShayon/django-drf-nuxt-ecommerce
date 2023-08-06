@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { SocialLinkInterface, NewArrivalInterface } from "types/SiteSettingsType";
+import { SocialLinkInterface, NewArrivalInterface, AddressInterface } from "types/SiteSettingsType";
 
 const useSettingsStore = defineStore('settingsStore', {
     state: () => ({
@@ -15,6 +15,12 @@ const useSettingsStore = defineStore('settingsStore', {
             { id: 2, title: "Product 2", category: 2, description: "Desc", image1: "/img/bg-2.jpg" },
             { id: 3, title: "Product 3", category: 1, description: "Desc", image1: "/img/bg-3.jpg" },
         ] as NewArrivalInterface[],
+        address: [
+            {id: 1, name: "Area", value:"Sher-E-Bangla Stadium, Mirpur"},
+            {id: 2, name: "City", value:"Dhaka"},
+            {id: 3, name: "Phone", value:"0178346734643"},
+            {id: 4, name: "Email", value:"admin@shakilfurniture.com"},
+        ] as AddressInterface[],
         selectedProductId: 1 as number,
         heightProductPrice: 10000 as number
     }),

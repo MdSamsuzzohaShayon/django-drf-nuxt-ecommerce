@@ -111,6 +111,8 @@ https://www.django-rest-framework.org/api-guide/relations/
 class UserUpdateSerializer(serializers.ModelSerializer):
     address = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     email = serializers.EmailField(read_only=True)
+    first_name = serializers.CharField(required=False)
+    last_name = serializers.CharField(required=False)
     class Meta:
         model = User 
         fields = ['id', 'email', 'first_name', 'last_name', 'address']   

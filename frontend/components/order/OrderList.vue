@@ -5,31 +5,32 @@
         <table class="w-full ">
             <thead>
                 <tr>
-                    <th class="p-2 text-center border-4 border-teal-500">ID</th>
-                    <th class="p-2 text-center border-4 border-teal-500">Product</th>
-                    <th class="p-2 text-center border-4 border-teal-500">Status</th>
-                    <th class="p-2 text-center border-4 border-teal-500">Quantity</th>
-                    <th class="p-2 text-center border-4 border-teal-500">Address</th>
-                    <th class="p-2 text-center border-4 border-teal-500">Total Price (৳)</th>
-                    <th class="p-2 text-center border-4 border-teal-500">Perform</th>
+                    <th class="p-2 text-center border border-teal-900">ID</th>
+                    <th class="p-2 text-center border border-teal-900">Product</th>
+                    <th class="p-2 text-center border border-teal-900">Status</th>
+                    <th class="p-2 text-center border border-teal-900">Quantity</th>
+                    <th class="p-2 text-center border border-teal-900">Address</th>
+                    <th class="p-2 text-center border border-teal-900">Total Price (৳)</th>
+                    <th class="p-2 text-center border border-teal-900">Perform</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="order in organizedOrders()">
-                    <td class="p-2 text-center border-2 border-teal-500">{{ order.id }}</td>
-                    <td class="p-2 text-center border-2 border-teal-500">{{ order.product }}</td>
-                    <td class="p-2 text-center border-2 border-teal-500 capitalize">{{ order.status }}</td>
-                    <td class="p-2 text-center border-2 border-teal-500">{{ order.quantity }}</td>
-                    <td class="p-2 text-center border-2 border-teal-500">{{ order.address }}</td>
-                    <td class="p-2 text-center border-2 border-teal-500">{{ order.total }}</td>
-                    <td class="p-2 text-center border-2 border-teal-500">
-                        <Icon class="pr-2" size="20" name="lucide:trash-2" color="red"
-                            v-on:click.prevent="deleteOrderHandler(order.id)" />
-                        <NuxtLink v-bind:to="`/orders/${order.id}`">
-                            <Icon class="pr-2" size="20" name="bytesize:eye" color="teal" />
+                    <td class="p-2 text-center border border-teal-900/50">{{ order.id }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">{{ order.product }}</td>
+                    <td class="p-2 text-center border border-teal-900/50 capitalize">{{ order.status }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">{{ order.quantity }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">{{ order.address }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">{{ order.total }}</td>
+                    <td class="p-2 text-center border border-teal-900/50 flex flex-col">
+                        <p class="cursor-pointer text-red-900" v-on:click.prevent="deleteOrderHandler(order.id)">Cancel</p>
+                        <NuxtLink v-bind:to="`/orders/${order.id}/`">
+                            <p class="cursor-pointer text-teal-900">View</p>
+                            <!-- <Icon class="pr-2" size="20" name="bytesize:eye" color="teal" /> -->
                         </NuxtLink>
-                        <Icon class="pr-2" size="20" name="line-md:edit" v-on:click.prevent="updateOrderHandler(order.id)"
-                            color="teal" />
+                        <p v-if="userInfo.is_staff" class="cursor-pointer text-teal-900" v-on:click.prevent="updateOrderHandler(order.id)">Update</p>
+                        <!-- <Icon v-if="userInfo.is_staff" class="pr-2" size="20" name="line-md:edit" v-on:click.prevent="updateOrderHandler(order.id)"
+                            color="teal" /> -->
                     </td>
                 </tr>
             </tbody>
@@ -78,7 +79,7 @@ const organizedOrders = () => {
 
         const findProduct = productStore.productList.find(p => p.id === ol[i].product);
         // console.log(userInfo.value.address[i]);
-        
+
         const newOrder: OrganizedOrderInterface = {
             id: ol[i].id,
             status: status,

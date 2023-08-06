@@ -1,6 +1,5 @@
 <template>
-    <div class="container mx-auto px-2 bg-teal-100">
-        <h1>Login</h1>
+    <div class="container mx-auto px-2 min-h-80">
         <UserSignin v-bind:is_staff="false" />
     </div>
 </template>

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { UserSignupInterface, UserSigninInterface, UserInfoInterface, UserAddressInterface } from '../types/UserType';
+import { UserSignupInterface, UserSigninInterface, UserInfoInterface, UserAddressInterface, AddressAddUpdateInterface } from '../types/UserType';
 
 const useUserStore = defineStore('userStore', {
     state: () => ({
@@ -24,13 +24,32 @@ const useUserStore = defineStore('userStore', {
             is_validated: null,
             is_staff: null,
             is_active: null,
-            address: [] as UserAddressInterface[]
+            address: [] as UserAddressInterface[],
         } as UserInfoInterface,
+        userAddressAddOrUpdate: {
+            city: '',
+            country: '',
+            phone: null,
+            area: '',
+            user: 0,
+        } as AddressAddUpdateInterface,
         userList: [] as UserInfoInterface[]
     }),
     actions: {
         setIsAuthenticated(isAuthenticated: boolean) {
             this.isAuthenticated = isAuthenticated;
+        },
+        setUserNewAddress(newAddress: UserAddressInterface) {
+            const prevAddress = Array.from(this.userInfo.address);
+            if(!newAddress.id){
+                newAddress.id = this.userInfo.address.length + 10;
+            }
+            const newAddressList = prevAddress.push(newAddress);
+            this.userInfo = {
+                ...this.userInfo,
+                // @ts-ignore
+                address: newAddressList
+            }
         },
         async setRefreshToken(refreshToken: string) {
             const { data: newRefreshToken, error: refreshError, refresh: refreshRequest, status: refreshStatus } = await useFetch(`${BACKEND_URL}/accounts/token/refresh/`, {
@@ -77,7 +96,7 @@ const useUserStore = defineStore('userStore', {
             });
             await refreshRequest();
             console.log({ "Error ": userError.value, "Status": userStatus.value, "data": userList.value });
-            if (userStatus.value === 'success' &&  userList.value) {
+            if (userStatus.value === 'success' && userList.value) {
                 this.userList = userList.value;
             }
         }

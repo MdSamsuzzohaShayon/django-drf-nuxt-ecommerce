@@ -13,7 +13,14 @@ interface NewArrivalInterface{
     image1: string
 }
 
+interface AddressInterface{
+    id: number;
+    name: string;
+    value: string;
+}
+
 export {
     SocialLinkInterface,
-    NewArrivalInterface
+    NewArrivalInterface,
+    AddressInterface
 }

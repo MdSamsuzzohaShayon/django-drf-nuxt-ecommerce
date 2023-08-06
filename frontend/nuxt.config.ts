@@ -14,10 +14,15 @@ export default defineNuxtConfig({
     '@nuxt/devtools',
   ],
   app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
     head: {
-      title: "Shakil Furniture",
+      // ChatGPT: SEO friendly meta title for furniture website of Shakil Furniture
+      title: "Shakil Furniture | Discover Timeless Elegance & Quality Handcrafted Furniture",
       meta: [
-        { name: 'description', content: 'A furniture website' }
+        { name: 'description', content: 'Experience comfort, durability, and sophistication with Shakil Furniture' },
+        // ChatGPT: SEO friendly meta keywords for emerging furniture website of Shakil Furniture 
+        { name: 'keywords', content: 'Handcrafted Furniture, Timeless Elegance, Quality Home Decor, Living Room Sets, Dining Tables, Bedroom Furniture, Modern Designs, Rustic Furniture, Affordable Luxury, Comfortable Sofas, Durable Furniture, Stylish Home Furnishings, Contemporary Chairs, Elegant Home Accessories, Trendy Furniture Collections, Customizable Furniture Options, Unique Wood Finishes, Premium Furniture Brands, Sustainable Furniture, Furniture Delivery & Installation' },
+        { name: 'author', content: 'Shakil' },
       ],
       link: [
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }

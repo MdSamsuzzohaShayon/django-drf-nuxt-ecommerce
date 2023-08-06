@@ -1,13 +1,12 @@
 <template>
     <div>
-        <h1>Order Detail</h1>
+        <h1>Policy</h1>
     </div>
 </template>
 
 <script setup lang="ts">
-
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

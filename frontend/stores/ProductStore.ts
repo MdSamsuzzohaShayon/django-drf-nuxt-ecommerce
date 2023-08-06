@@ -19,6 +19,7 @@ const useProductStore = defineStore('productStore', {
             description: '',
             category: 1,
         } as ProductBaseInterface,
+        productSingle: {} as ProductInterface,
         productUpdate: false as boolean,
         // selectProductToUpdate: {} as ProductInterface,
         // productPropsToUpdate: {}
@@ -75,6 +76,16 @@ const useProductStore = defineStore('productStore', {
                 this.cartList = JSON.parse(prevCart);
             }
         },
+        async fetchSingleProduct(pId: number) {
+            let url = `${BACKEND_URL}/products/${pId}`;
+            const { data: products, status: productStatus, refresh: refreshFetch } = await useFetch<ProductInterface>(url, { key: pId + "" });
+            if (productStatus.value === 'success' && products.value) {
+                this.productSingle = products.value;
+            }else{
+                // @ts-ignore
+                throw createError({statusCode: 404, statusMessage: "Product not found", fetal: true});
+            }
+        },
         async fetchProducts(q: string | null = null) {
             let url = `${BACKEND_URL}/products/`;
             if (q !== null && q !== '') {
@@ -101,7 +112,7 @@ const useProductStore = defineStore('productStore', {
         },
     },
     getters: {
-        getCartById(state){
+        getCartById(state) {
             // return (userId) => state.users.find((user) => user.id === userId)
             return (cId: string) => state.cartList.find((c) => c.id === cId);
         },

@@ -24,7 +24,7 @@ import useProductStore from '../../stores/ProductStore';
 import useElementsStore from '../../stores/ElementsStore';
 import useUserStore from '../../stores/UserStore';
 import userOrderStore from '../../stores/OrderStore';
-import { ProductOrderInterface } from '../../types/ProductOrderType';
+import { OrderInterface } from '../../types/ProductOrderType';
 
 const productStore = useProductStore();
 const elementsStore = useElementsStore();
@@ -51,7 +51,7 @@ const payAndOrderHandler = async (e: Event) => {
     const { access: accessToken } = token.value;
     const cart = productStore.getCartById(cId);
     if (!cart) return elementsStore.setErrorMessageList(["Product not found!"]);
-    const { data: orderData, status: orderStatus } = await useFetch<ProductOrderInterface>(`${BACKEND_URL}/orders/new/`, {
+    const { data: orderData, status: orderStatus } = await useFetch<OrderInterface>(`${BACKEND_URL}/orders/new/`, {
         key: cId,
         method: "POST",
         body: {

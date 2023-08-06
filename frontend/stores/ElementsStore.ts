@@ -5,8 +5,10 @@ const useElementStore = defineStore("elementsStore", {
     state: () => ({
         menus: [
             { id: 1, text: 'Home', link: "/" },
+            { id: 1, text: 'Product', link: "/products" },
             { id: 2, text: 'About', link: "/about" },
             { id: 3, text: 'Contact', link: "/contact" },
+            { id: 3, text: 'Policy', link: "/policy" },
         ] as MenuInterface[],
         rightMenus: [
             { id: 1, name: "simple-line-icons:magnifier", text: "Search", color: 'black', link: '#' },
@@ -24,19 +26,36 @@ const useElementStore = defineStore("elementsStore", {
         userDashboardSidebar: [
             { id: 1, name: "simple-line-icons:user", text: "Profile" },
             { id: 2, name: "simple-line-icons:handbag", text: "Order" },
+            { id: 3, name: "simple-line-icons:user", text: "Address" },
          ] as SidebarMenuInterface[],
         selectedDSID: 1 as number, // DSI = Dashboard Sidebar ID
         errorMessageList: [] as string[],
         successMessageList: [] as string[],
         isLoading: false as boolean,
-        showFilter: false as boolean
+        shadowOverflow: false as boolean,
+        showFilter: false as boolean,
+        showMobileMenu: false as boolean,
+
+        // User Dashboard
+        addAddress: false as boolean,
+        showAddressList: true as boolean,  
     }),
     actions: {
         openFilterBar() {
             this.showFilter = true;
+            this.shadowOverflow = true;
         },
         closeFilterBar() {
             this.showFilter = false;
+            this.shadowOverflow = false;
+        },
+        openMobileMenu() {
+            this.showMobileMenu = true;
+            this.shadowOverflow = true;
+        },
+        closeMobileMenu() {
+            this.showMobileMenu = false;
+            this.shadowOverflow = false;
         },
         setErrorMessageList(messageList: string[]) {
             this.errorMessageList = messageList;
@@ -52,7 +71,15 @@ const useElementStore = defineStore("elementsStore", {
         },
         changeDSID(newDSID: number) {
             this.selectedDSID = newDSID;
-        }
+        },
+        
+        // User dashboard
+        setAddUpdateAddress(addAddress: boolean){
+            this.addAddress = addAddress;
+        },
+        setShowAddOrAddress(showAddressList: boolean){
+            this.showAddressList = showAddressList;
+        },
     }
 });
 

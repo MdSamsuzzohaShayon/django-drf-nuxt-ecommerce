@@ -1,0 +1,22 @@
+<template>
+    <div class="container mx-auto px-2 py-2 static">
+        <h2 class="text-4xl mt-12">Shop by categories</h2>
+        <div class="categories grid gap-x-4 grid-cols-4 mt-8">
+            <!-- grid gap-4 grid-cols-3 grid-rows-3 -->
+            <div class="category-item w-full bg-teal-100" v-for="cat in categoryList">
+                <NuxtLink v-bind:to="'/categories/' + cat.id + '/'" class="w-full flex items-center justify-center flex-col" >
+                    <img v-bind:src="cat.image" alt="" class="h-52 object-center object-cover">
+                    <h4 class="text-2xl font-normal w-full align-left pl-2">{{ cat.name }}</h4>
+                </NuxtLink>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { storeToRefs } from 'pinia';
+import useCategoryStore from '../../stores/CategoryStore';
+// https://dev.to/rafaelmagalhaes/pinia-and-nuxt-3-4ij5
+const categoryStore = useCategoryStore();
+const { categoryList } = storeToRefs(categoryStore);
+</script>

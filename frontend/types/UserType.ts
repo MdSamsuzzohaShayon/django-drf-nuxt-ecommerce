@@ -12,13 +12,23 @@ interface UserSignupInterface extends UserSigninInterface {
 }
 
 interface UserAddressInterface {
-    id: number;
+    id?: number;
     city: string;
     country: string;
     phone: number;
     area: string;
     user: number;
 }
+
+interface AddressAddUpdateInterface {
+    id?: number;
+    city: string;
+    country: string;
+    phone: number | null;
+    area: string;
+    user: number;
+}
+
 interface UserInfoInterface {
     id: number | null;
     email: string | null;
@@ -36,5 +46,6 @@ export {
     UserSignupInterface,
     UserSigninInterface,
     UserInfoInterface,
-    UserAddressInterface
+    UserAddressInterface,
+    AddressAddUpdateInterface
 }
