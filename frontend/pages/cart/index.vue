@@ -4,7 +4,7 @@
         <div class="cart-list mt-4">
             <div class="cart" v-for="c in cartList" v-bind:key="c.id">
                 <div v-if="findProductById(c.pId)" v-bind:set="product = findProductById(c.pId)"
-                    class="flex justify-between items-center bg-teal-100 mb-2 flex-col md:flex-row">
+                    class="flex justify-between items-center bg-white mb-2 flex-col md:flex-row">
                     <img v-bind:src="findProductById(c.pId)?.image1" v-bind:alt="product?.title" class="w-full md:w-44 h-44 object-fit object-cover" loading="lazy" >
                     <h3 class="font-bold mt-4 md:mt-0 text-lg">{{ product?.title }}</h3>
                     <div class="seg-1 flex flex-col justify-center items-center h-full">

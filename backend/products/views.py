@@ -68,7 +68,6 @@ class ProductUpdateView(StaffEditorPermissionMixin, generics.UpdateAPIView):
 
     def perform_update(self, serializer):
         instance = serializer.save()
-        print(instance)
         if instance.title:
             del instance.title
 
@@ -98,7 +97,6 @@ class CategoryUpdateView(StaffEditorPermissionMixin, generics.UpdateAPIView):
 
     def perform_update(self, serializer):
         instance = serializer.save()
-        print(instance)
 
 class CategoryDeleteView(StaffEditorPermissionMixin, generics.DestroyAPIView):
     queryset = Category.objects.all()
