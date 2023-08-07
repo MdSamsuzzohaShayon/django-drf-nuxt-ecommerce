@@ -15,6 +15,7 @@ const useOrderStore = defineStore('orderStore', {
         },
         async fetchOrders(access: string) {
             const { data: productOrders, refresh: refreshRequest } = await useFetch<OrderInterface[]>(`${BACKEND_URL}/orders/user/`, {
+                key: `order-user-${new Date().getSeconds()}-${new Date().getMilliseconds()}`,
                 headers: {
                     "Authorization": "Bearer " + access
                 }
@@ -26,7 +27,18 @@ const useOrderStore = defineStore('orderStore', {
             if (productOrders.value) {
                 this.orderList = productOrders.value
             }
-
+        },
+        async fetchAllOrders(access: string) {
+            const { data: productOrders, refresh: refreshRequest } = await useFetch<OrderInterface[]>(`${BACKEND_URL}/orders/list/`, {
+                key: `order-list-${new Date().getSeconds()}-${new Date().getMilliseconds()}`,
+                headers: {
+                    "Authorization": "Bearer " + access
+                }
+            });
+            await refreshRequest();
+            if (productOrders.value) {
+                this.orderList = productOrders.value
+            }
         },
     },
     getters: {

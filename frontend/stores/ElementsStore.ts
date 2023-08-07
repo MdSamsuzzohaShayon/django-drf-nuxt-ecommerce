@@ -27,18 +27,23 @@ const useElementStore = defineStore("elementsStore", {
             { id: 1, name: "simple-line-icons:user", text: "Profile" },
             { id: 2, name: "simple-line-icons:handbag", text: "Order" },
             { id: 3, name: "simple-line-icons:user", text: "Address" },
-         ] as SidebarMenuInterface[],
+        ] as SidebarMenuInterface[],
         selectedDSID: 1 as number, // DSI = Dashboard Sidebar ID
         errorMessageList: [] as string[],
         successMessageList: [] as string[],
         isLoading: false as boolean,
+        
+        // Menus with shadow
         shadowOverflow: false as boolean,
         showFilter: false as boolean,
         showMobileMenu: false as boolean,
+        showSearchBar: false as boolean,
 
         // User Dashboard
         addAddress: false as boolean,
-        showAddressList: true as boolean,  
+        showAddressList: true as boolean,
+        addProduct: false as boolean,
+        showProductList: true as boolean,
     }),
     actions: {
         openFilterBar() {
@@ -57,6 +62,13 @@ const useElementStore = defineStore("elementsStore", {
             this.showMobileMenu = false;
             this.shadowOverflow = false;
         },
+        setShowSearchBar(show: boolean){
+            this.showSearchBar = show;
+            this.shadowOverflow = show;
+        },
+        setShadowOverflow(overflow: boolean) {
+            this.shadowOverflow = overflow;
+        },
         setErrorMessageList(messageList: string[]) {
             this.errorMessageList = messageList;
         },
@@ -72,13 +84,19 @@ const useElementStore = defineStore("elementsStore", {
         changeDSID(newDSID: number) {
             this.selectedDSID = newDSID;
         },
-        
-        // User dashboard
-        setAddUpdateAddress(addAddress: boolean){
+
+        // User dashboard and admin panel
+        setAddUpdateAddress(addAddress: boolean) {
             this.addAddress = addAddress;
         },
-        setShowAddOrAddress(showAddressList: boolean){
+        setShowAddOrAddress(showAddressList: boolean) {
             this.showAddressList = showAddressList;
+        },
+        setAddProduct(addProduct: boolean) {
+            this.addProduct = addProduct;
+        },
+        setShowProductList(showProductList: boolean) {
+            this.showProductList = showProductList;
         },
     }
 });

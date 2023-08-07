@@ -25,11 +25,11 @@
                     <Icon name="grommet-icons:menu" size="20" v-on:click.prevent="elementsStore.openMobileMenu()"
                         ref="sidebarOpenSvgEl" id="menu-open-btn" />
                 </div>
-                <nav class="w-4/5 md:w-1/3 fixed md:static left-0 top-0 z-20 md:block items-start justify-between bg-white"
+                <nav class="w-4/5 md:w-1/3 fixed md:static left-0 top-0 z-20 md:z-0 md:block items-start justify-between bg-white"
                     :class="showMobileMenu ? 'flex' : 'hidden md:flex'" ref="sidebarDivEl">
                     <ul
                         class="flex justify-start list-none flex-col md:flex-row bg-white h-screen md:h-fit w-fit md:w-full px-4 py-8 md:p-0 gap-4 md:gap-1">
-                        <li class="mr-4 cursor-pointer font-semibold" v-for="menu in menus">
+                        <li class="mr-4 cursor-pointer font-semibold" v-for="menu in menus" v-on:click.prevent="elementsStore.closeMobileMenu()" >
                             <NuxtLink v-bind:to="menu.link" class="capitalize">{{ menu.text }}</NuxtLink>
                         </li>
                     </ul>
@@ -71,7 +71,7 @@
                     </form>
                     <div class="close-button">
                         <Icon name="grommet-icons:close" size="20" class="text-teal-950"
-                            v-on:click.prevent="showSearchBar = !showSearchBar" />
+                            v-on:click.prevent="elementsStore.setShowSearchBar(false)" />
                     </div>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="address w-full md:w-1/4" >
+                <div class="address w-full md:w-1/4">
                     <p v-for="a in address" v-bind:key="a.id">{{ a.name }} : {{ a.value }}</p>
                 </div>
             </div>
@@ -131,7 +131,8 @@ import useCategoryStore from '../stores/CategoryStore';
 // https://dev.to/rafaelmagalhaes/pinia-and-nuxt-3-4ij5
 
 // Local State
-const showSearchBar = ref<boolean>(false);
+// const showSearchBar = ref<boolean>(false);
+
 const searchInputEl = ref<HTMLInputElement | null>(null);
 const sidebarDivEl = ref<HTMLDivElement | null>(null);
 const sidebarOpenSvgEl = ref<HTMLOrSVGElement | null>(null);
@@ -144,12 +145,13 @@ const elementsStore = useElementsStore();
 const userStore = useUserStore();
 
 const { logoUrl, socialLinks, address } = storeToRefs(settingsStore);
-const { menus, rightMenus, shadowOverflow, showMobileMenu } = storeToRefs(elementsStore);
+const { menus, rightMenus, shadowOverflow, showMobileMenu, showSearchBar } = storeToRefs(elementsStore);
 const { isAuthenticated } = storeToRefs(userStore);
 
 // Show or hide elements
 const displaySearchBarHandler = (e: Event) => {
-    showSearchBar.value = !showSearchBar.value;
+    elementsStore.setShowSearchBar(true);
+    // showSearchBar.value = !showSearchBar.value;
     setTimeout(() => {
         if (searchInputEl.value) {
             searchInputEl.value.focus()
@@ -163,10 +165,15 @@ const mobileMenuCloseHandler = (e: Event) => {
 }
 
 const wrapperHandler = (e: Event) => {
+    /*
+    // console.log("Working");
+    // console.log(shadowOverflow.value);    
     if (!e.target) return;
+    if (!shadowOverflow.value) return;
     const clickedEl: HTMLElement = e.target as HTMLElement;
     const exceptElIds: string[] = ["menu-open-btn", "search-btn"];
     if (clickedEl.id && exceptElIds.includes(clickedEl.id)) return;
+
     // console.log(sidebarOpenSvgEl.value?.id, clickedEl.id);
     // const exceptionalElements: HTMLElement[] = [sidebarOpenSvgEl.value];
     // if (exceptionalElements.includes(clickedEl)) return;
@@ -176,7 +183,13 @@ const wrapperHandler = (e: Event) => {
     if (!withinBoundary) {
         elementsStore.closeMobileMenu();
         elementsStore.closeFilterBar();
+        elementsStore.setShadowOverflow(false);
     }
+
+    if (showSearchBar.value || showMobileMenu.value){
+        elementsStore.setShadowOverflow(true);
+    }
+    */
 }
 
 // document.addEventListener('click', (e: Event) => {
@@ -203,7 +216,7 @@ const searchHandler = async (e: Event) => {
     await navigateTo(`/search/?q=${state.q}`);
 }
 
-const subscribeSubmitHandler=(e: Event)=>{
+const subscribeSubmitHandler = (e: Event) => {
 
 }
 
@@ -229,6 +242,10 @@ onMounted(async () => {
     if (!token || !token.value) {
         userStore.setIsAuthenticated(false);
     } else {
+        userStore.setIsAuthenticated(true);
+        const userInfo = localStorage.getItem('userInfo');
+        if (userInfo) userStore.setUserInfo(JSON.parse(userInfo));
+
         // @ts-ignore
         const { access: accessBefore, refresh: refreshBefore } = token.value;
         // Get User from localStorage and set state 

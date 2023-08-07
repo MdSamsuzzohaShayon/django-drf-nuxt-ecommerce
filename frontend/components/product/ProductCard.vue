@@ -1,9 +1,9 @@
 <template>
     <div class="bg-white shadow-md h-full text-center">
         <NuxtLink v-bind:to="`/products/${product.id}/`">
-            <img v-bind:src="product.image1" class="w-full h-60 md:h-80 object-fit object-cover" alt="">
+            <img v-bind:src="product.image1" class="w-full h-60 md:h-80 object-fit object-cover" v-bind:alt="product.title" loading="lazy" >
             <!-- <p class="font-semibold capitalize mt-4 md:mt-8 text-teal-950">{{ product.title }}</p> -->
-            <h2>{{ product.title }}</h2>
+            <h2 class="text-teal-950 ">{{ product.title }}</h2>
             <p v-if="product.discount_price" class="text-teal-950"> ৳{{ product.discount_price }} <span class="line-through text-teal-950/50 ml-4">৳{{ product.price }}</span> </p>
             <p v-else class="text-teal-950" > ৳{{ product.price }}</p>
             <p class="text-teal-950 pb-2">Stock {{ product.total_stock }}</p>

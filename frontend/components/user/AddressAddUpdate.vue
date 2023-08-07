@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="mt-4">New Address</h3>
+        <h3 class="mt-4">{{ addAddress ? 'New Address' : 'Update Address' }}</h3>
         <form class="flex flex-col gap-4 mt-8" v-on:submit.prevent="addressAddUpdateHandler">
             <div class="input-group w-full">
                 <input required="true" type="text" id="user-area"
@@ -18,13 +18,13 @@
                     placeholder="Country" v-model="userAddressAddOrUpdate.country">
             </div>
             <div class="input-group flex justify-between gap-4">
-                <input required="true" type="text" id="user-country"
-                    class="bg-white text-teal-950 outline-0 px-3 py-2 border border-teal-950/25 w-full px-1 placeholder:text-teal-950/50"
+                <input required="true" type="number" id="user-country"
+                    class="bg-white text-teal-950 outline-0 px-3 py-2 border border-teal-950/25 w-full px-1 placeholder:text-teal-950/50 remove-arrow"
                     placeholder="Phone" v-model="userAddressAddOrUpdate.phone">
             </div>
             <div class="input-group w-full">
                 <button class="bg-teal-900 text-teal-50 border-1 border-teal-950 px-5 py-2 w-full font-bold"
-                    type="submit">Add</button>
+                    type="submit">{{ addAddress ? 'Add' : 'Update' }}</button>
             </div>
         </form>
     </div>
@@ -39,6 +39,7 @@ const userStore = useUserStore();
 const elementStore = useElementsStore();
 
 const { userAddressAddOrUpdate, userInfo } = storeToRefs(userStore);
+const { addAddress } = storeToRefs(elementStore);
 
 const addressAddUpdateHandler = async (e: Event) => {
     // console.log({ ...userAddressAddOrUpdate.value });

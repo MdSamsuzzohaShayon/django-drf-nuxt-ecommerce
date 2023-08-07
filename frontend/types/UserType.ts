@@ -12,7 +12,7 @@ interface UserSignupInterface extends UserSigninInterface {
 }
 
 interface UserAddressInterface {
-    id?: number;
+    id: number;
     city: string;
     country: string;
     phone: number;
@@ -41,11 +41,22 @@ interface UserInfoInterface {
     address: UserAddressInterface[];
 }
 
+interface UserTokenInterface{
+    access: string;
+    refresh: string;
+}
+
+interface UserRequestSuccessResInt{
+    detail: string;
+}
+
 
 export {
     UserSignupInterface,
     UserSigninInterface,
     UserInfoInterface,
     UserAddressInterface,
-    AddressAddUpdateInterface
+    AddressAddUpdateInterface,
+    UserTokenInterface,
+    UserRequestSuccessResInt
 }

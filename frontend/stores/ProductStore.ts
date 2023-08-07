@@ -1,6 +1,6 @@
 // const { data: products } = await useFetch('http://localhost:8000/api/products/');
 import { defineStore } from "pinia";
-import { ProductInterface, ProductFilterInterface, ProductFilterOptionalInterface, ProductBaseInterface, CartItemInterface } from '../types/ProductType';
+import { ProductInterface, ProductFilterInterface, ProductFilterOptionalInterface, ProductAddUpdateInterface, CartItemInterface } from '../types/ProductType';
 
 const useProductStore = defineStore('productStore', {
     state: () => ({
@@ -13,12 +13,12 @@ const useProductStore = defineStore('productStore', {
         } as ProductFilterInterface,
         productUpdateAdd: {
             title: '',
-            price: 0,
-            discount_price: 0,
-            total_stock: 0,
+            price: null,
+            discount_price: null,
+            total_stock: null,
             description: '',
             category: 1,
-        } as ProductBaseInterface,
+        } as ProductAddUpdateInterface,
         productSingle: {} as ProductInterface,
         productUpdate: false as boolean,
         // selectProductToUpdate: {} as ProductInterface,

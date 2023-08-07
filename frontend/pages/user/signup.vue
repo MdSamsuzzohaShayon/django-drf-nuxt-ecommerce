@@ -48,10 +48,16 @@ import { storeToRefs } from 'pinia';
 import useUserStore from '../../stores/UserStore';
 import useElementStore from '../../stores/ElementsStore';
 
+// Meta
+definePageMeta({
+  middleware: ["auth"]
+  // or middleware: 'auth'
+});
+
 const userStore = useUserStore();
 const elementStore = useElementStore();
 
-const { userSignup, isAuthenticated } = storeToRefs(userStore);
+const { userSignup } = storeToRefs(userStore);
 const { errorMessageList, successMessageList } = storeToRefs(elementStore);
 
 const signupHandler = async (e: Event) => {
@@ -65,7 +71,7 @@ const signupHandler = async (e: Event) => {
             method: "POST",
             body: validData
         });
-        console.log({ data: data.value, pending: pending.value, error: error.value, refresh: refresh, status: status.value });
+        // console.log({ data: data.value, pending: pending.value, error: error.value, refresh: refresh, status: status.value });
         if (data.value) {
             if (status.value === 'success') {
                 elementStore.setSuccessMessageList(Object.values(data.value));
@@ -77,11 +83,7 @@ const signupHandler = async (e: Event) => {
     }
 }
 
-onMounted(() => {
-    if (isAuthenticated.value === true) {
-        navigateTo('/user/dashboard/');
-    }
-});
+
 
 </script>
 

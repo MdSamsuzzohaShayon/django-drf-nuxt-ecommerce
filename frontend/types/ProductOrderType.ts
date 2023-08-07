@@ -1,3 +1,5 @@
+import { UserAddressInterface } from "./UserType";
+
 enum OrderStatus {
     PENDING = "PG",
     SHIPPING = "SG",
@@ -9,7 +11,7 @@ interface OrderInterface {
     status: OrderStatus.PENDING | OrderStatus.SHIPPING | OrderStatus.COMPLETED;
     is_paid: boolean;
     product: number;
-    address: number;
+    address: UserAddressInterface;
     quantity: number;
     total: number;
 }
@@ -19,7 +21,7 @@ interface OrganizedOrderInterface {
     status: string;
     is_paid: boolean;
     product: string;
-    address: string;
+    address: UserAddressInterface;
     quantity: number;
     total: number;
 }

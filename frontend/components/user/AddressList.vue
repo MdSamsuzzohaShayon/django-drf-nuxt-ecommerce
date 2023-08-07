@@ -9,7 +9,7 @@
                     <p>Phone: {{ a.phone }}</p>
                 </div>
                 <div class="contaoller">
-                    <p class="cursor-pointer text-teal-900">Update</p>
+                    <p class="cursor-pointer text-teal-900" v-on:click.prevent="selectAddressToUpdate(a.id)">Update</p>
                     <p class="cursor-pointer text-red-900">Delete</p>
                 </div>
             </div>
@@ -18,7 +18,19 @@
 </template>
 
 <script setup lang="ts">
+import useElementsStore from '../../stores/ElementsStore';
+import useUserStore from '../../stores/UserStore';
 const { userInfo } = defineProps(['userInfo']);
+
+const elementStore = useElementsStore();
+const userStore = useUserStore();
+
+const selectAddressToUpdate = (addressId: number) => {
+    if (!addressId) return;
+    userStore.setUserAddressAddOrUpdate(addressId);
+    elementStore.setAddUpdateAddress(false);
+    elementStore.setShowAddOrAddress(false);
+}
 
 </script>
 

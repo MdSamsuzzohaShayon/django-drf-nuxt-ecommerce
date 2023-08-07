@@ -2,8 +2,14 @@
     <div class="container mx-auto px-2 ">
         <div class="message-content w-full mt-8">
             <p class="text-red-900 px-4 py-2 capitalize w-full bg-red-100 text-red-900" v-for="message in errorMessageList">
-                {{ message }} <span class="float-right"><Icon name="grommet-icons:close" size="20" v-on:click.prevent="elementStore.resetErrorMessageList()" /></span> </p>
-            <p class="text-teal-900 px-4 py-2 capitalize" v-for="message in successMessageList">{{ message }} <span class="float-right"><Icon name="grommet-icons:close" size="20" v-on:click.prevent="elementStore.resetSuccessMessageList()" /></span> </p>
+                {{ message }} <span class="float-right">
+                    <Icon name="grommet-icons:close" size="20" v-on:click.prevent="elementStore.resetErrorMessageList()" />
+                </span> </p>
+            <p class="text-teal-900 px-4 py-2 capitalize" v-for="message in successMessageList">{{ message }} <span
+                    class="float-right">
+                    <Icon name="grommet-icons:close" size="20"
+                        v-on:click.prevent="elementStore.resetSuccessMessageList()" />
+                </span> </p>
         </div>
         <div class="main-content flex flex-col md:flex-row justify-start gap-8">
             <div class="sign-in w-full md:w-2/5">
@@ -48,6 +54,7 @@
 import { storeToRefs } from 'pinia';
 import useUserStore from '../../stores/UserStore';
 import useElementStore from '../../stores/ElementsStore';
+import { UserTokenInterface } from '../../types/UserType'
 
 const oneDayInSeconds = 24 * 60 * 60; // 1 day = 24 hours * 60 minutes * 60 seconds
 
@@ -69,29 +76,29 @@ const signinHandler = async (e: Event) => {
     const validData = userStore.serializedUserSignin
     if (validData) {
         // https://youtrack.jetbrains.com/issue/WEB-58600
-        const { data, pending, error, refresh, status } = await useFetch(`${BACKEND_URL}/accounts/signin/`, {
+        const { data, pending, error, refresh, status } = await useFetch<UserTokenInterface>(`${BACKEND_URL}/accounts/signin/`, {
             method: "POST",
             body: validData
         });
-        console.log({ data: data.value, pending: pending.value, error: error.value, refresh: refresh, status: status.value });
-        if (data.value) {
-            if (status.value === 'success') {
-                userStore.setIsAuthenticated(true);
-                const token = useCookie("token", {
-                    maxAge: MAX_SIGNIN_COOKIE_AGE,
-                    // httpOnly: true, // On https protocal, Need to set by server 
-                });
-                token.value = JSON.stringify(data.value);
-                // document.cookie
-                if (props.is_staff === true) {
-                    await navigateTo("/admin/");
-                } else {
-                    await navigateTo("/user/dashboard/");
-                }
+        if (status.value === 'success' && data.value) {
+            userStore.setIsAuthenticated(true);
+            const token = useCookie("token", {
+                maxAge: MAX_SIGNIN_COOKIE_AGE,
+                // httpOnly: true, // On https protocal, Need to set by server 
+            });
+            token.value = JSON.stringify(data.value);
+
+            // Fetch user with token we got
+            if (data.value.access) await userStore.fetchUser(data.value.access);
+
+            // document.cookie
+            if (props.is_staff === true) {
+                await navigateTo("/admin/");
             } else {
-                elementStore.setErrorMessageList(Object.values(data.value));
+                await navigateTo("/user/dashboard/");
             }
-        }
+        } 
+        
         if (error.value) {
             if (error.value.statusCode == 401) {
                 elementStore.setErrorMessageList(["Invalid credentials!"]);

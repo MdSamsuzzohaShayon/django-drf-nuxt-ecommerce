@@ -1,8 +1,7 @@
 <template>
     <div>
-        <h1>Order List</h1>
         <!-- orderList -->
-        <table class="w-full ">
+        <table class="w-full mt-4">
             <thead>
                 <tr>
                     <th class="p-2 text-center border border-teal-900">ID</th>
@@ -20,7 +19,7 @@
                     <td class="p-2 text-center border border-teal-900/50">{{ order.product }}</td>
                     <td class="p-2 text-center border border-teal-900/50 capitalize">{{ order.status }}</td>
                     <td class="p-2 text-center border border-teal-900/50">{{ order.quantity }}</td>
-                    <td class="p-2 text-center border border-teal-900/50">{{ order.address }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">{{ `${order.address.area}, ${order.address.city}, ${order.address.phone}` }}</td>
                     <td class="p-2 text-center border border-teal-900/50">{{ order.total }}</td>
                     <td class="p-2 text-center border border-teal-900/50 flex flex-col">
                         <p class="cursor-pointer text-red-900" v-on:click.prevent="deleteOrderHandler(order.id)">Cancel</p>
@@ -86,7 +85,8 @@ const organizedOrders = () => {
             is_paid: ol[i].is_paid,
             product: findProduct ? findProduct.title : '',
             quantity: ol[i].quantity,
-            address: `${userInfo.value.address[0]?.area}, ${userInfo.value.address[0]?.city}`,
+            // address: `${userInfo.value.address[0]?.area}, ${userInfo.value.address[0]?.city}`,
+            address: ol[i].address,
             total: ol[i].total,
         }
         newOrderList.push(newOrder);

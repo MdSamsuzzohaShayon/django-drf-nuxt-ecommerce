@@ -1,28 +1,28 @@
 <template>
     <div>
-        <h1>Product List</h1>
+        <!-- <h1>Product List</h1> -->
         <!-- productList -->
-        <table class="w-full ">
+        <table class="w-full mt-4">
             <thead>
                 <tr>
-                    <th class="p-2 text-center border-4 border-teal-500">ID</th>
-                    <th class="p-2 text-center border-4 border-teal-500">Title</th>
-                    <th class="p-2 text-center border-4 border-teal-500">Category</th>
-                    <th class="p-2 text-center border-4 border-teal-500">Price</th>
-                    <th class="p-2 text-center border-4 border-teal-500">Discounted Price</th>
-                    <th class="p-2 text-center border-4 border-teal-500">Stock</th>
-                    <th class="p-2 text-center border-4 border-teal-500">Perform</th>
+                    <th class="p-2 text-center border border-teal-900">ID</th>
+                    <th class="p-2 text-center border border-teal-900">Title</th>
+                    <th class="p-2 text-center border border-teal-900">Category</th>
+                    <th class="p-2 text-center border border-teal-900">Price</th>
+                    <th class="p-2 text-center border border-teal-900">Discounted Price</th>
+                    <th class="p-2 text-center border border-teal-900">Stock</th>
+                    <th class="p-2 text-center border border-teal-900">Perform</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="product in productList">
-                    <td class="p-2 text-center border-2 border-teal-500">{{ product.id }}</td>
-                    <td class="p-2 text-center border-2 border-teal-500">{{ product.title }}</td>
-                    <td class="p-2 text-center border-2 border-teal-500">{{ product.category }}</td>
-                    <td class="p-2 text-center border-2 border-teal-500">{{ product.price }}</td>
-                    <td class="p-2 text-center border-2 border-teal-500">{{ product.discount_price }}</td>
-                    <td class="p-2 text-center border-2 border-teal-500">{{ product.total_stock }}</td>
-                    <td class="p-2 text-center border-2 border-teal-500">
+                    <td class="p-2 text-center border border-teal-900/50">{{ product.id }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">{{ product.title }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">{{ product.category }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">{{ product.price }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">{{ product.discount_price }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">{{ product.total_stock }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">
                         <Icon class="pr-2" size="20" name="lucide:trash-2" color="red"
                             v-on:click.prevent="deleteProductHandler(product.id)" />
                         <NuxtLink v-bind:to="`/products/${product.id}`">

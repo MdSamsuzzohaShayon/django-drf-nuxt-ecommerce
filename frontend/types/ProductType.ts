@@ -5,7 +5,17 @@ interface ProductBaseInterface {
     discount_price: number;
     total_stock: number;
     description: string;
-    category: number
+    category: number;
+}
+
+interface ProductAddUpdateInterface {
+    id: number | null;
+    title: string;
+    price: number | null;
+    discount_price: number | null;
+    total_stock: number | null;
+    description: string;
+    category: number | null;
 }
 
 interface ProductInterface extends ProductBaseInterface {
@@ -41,5 +51,6 @@ export {
     ProductInterface,
     ProductFilterInterface,
     ProductFilterOptionalInterface,
-    CartItemInterface
+    CartItemInterface,
+    ProductAddUpdateInterface
 }

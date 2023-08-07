@@ -1,8 +1,7 @@
 <template>
-    <div>
-        <h1>Category List</h1>
+    <div class="mt-4">
         <ul>
-            <li v-for="cat in categoryList" class="flex justify-between bg-teal-100 mb-2 p-2">
+            <li v-for="cat in categoryList" class="flex justify-between bg-white mb-2 p-2">
                 <p>{{ cat.name }}</p>
                 <Icon size="20" name="lucide:trash-2" color="red" v-on:click.prevent="deleteCategoryHandler(cat.id)" />
             </li>
