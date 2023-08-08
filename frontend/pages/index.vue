@@ -32,17 +32,45 @@
         </div>
 
         <Category />
+
+        <section class="section-2 container mx-auto px-2">
+            <h2 class="mt-8">Fetured</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-5 mt-4">
+                <div v-for="p in featuredProductList">
+                    <!-- <NuxtLink v-bind:to="`/products/${p.id}/`">{{ p.title }}</NuxtLink> -->
+                    <ProductCard v-bind:product="p" />
+                </div>
+            </div>
+        </section>
+        <section class="section-3 container mx-auto px-2">
+            <h2 class="mt-8">New Collection</h2>
+        </section>
+        <section class="section-4 container mx-auto px-2">
+            <h2 class="mt-8">Trusted By Top Companies</h2>
+            <div class="company-logos flex justify-between mt-4 flex-wrap">
+                <div v-for="logo in trustedCompanyLogos" class="w-20 w-1/6" >
+                    <img v-bind:src="'/img/'+logo" alt="" class="h-20">
+                </div>
+            </div>
+        </section>
     </div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import useSettingsStore from '../stores/SettingsStore';
-
-
+import useProductStore from '../stores/ProductStore';
 
 const settingsStore = useSettingsStore();
-const { newArrivals, selectedProductId, siteTitle } = storeToRefs(settingsStore);
+const productStore = useProductStore();
+
+const { newArrivals, selectedProductId, siteTitle, featuredProductList, trustedCompanyLogos } = storeToRefs(settingsStore);
+const { productList } = storeToRefs(productStore);
+
+await productStore.fetchProducts();
+const newProductList = productList.value.slice(0, 5);
+settingsStore.setFeaturedProducts(newProductList);
+
 
 </script>
 

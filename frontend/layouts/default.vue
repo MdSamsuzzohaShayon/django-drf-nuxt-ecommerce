@@ -29,7 +29,8 @@
                     :class="showMobileMenu ? 'flex' : 'hidden md:flex'" ref="sidebarDivEl">
                     <ul
                         class="flex justify-start list-none flex-col md:flex-row bg-white h-screen md:h-fit w-fit md:w-full px-4 py-8 md:p-0 gap-4 md:gap-1">
-                        <li class="mr-4 cursor-pointer font-semibold" v-for="menu in menus" v-on:click.prevent="elementsStore.closeMobileMenu()" >
+                        <li class="mr-4 cursor-pointer font-semibold" v-for="menu in menus"
+                            v-on:click.prevent="elementsStore.closeMobileMenu()">
                             <NuxtLink v-bind:to="menu.link" class="capitalize">{{ menu.text }}</NuxtLink>
                         </li>
                     </ul>
@@ -49,6 +50,9 @@
                             <NuxtLink v-bind:to="rm.link" v-else-if="rm.id === 2" class="cursor-pointer">
                                 <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color" />
                             </NuxtLink>
+                            <NuxtLink to="/admin/" v-else-if="rm.id === 3 && userInfo.is_staff">
+                                <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color" />
+                            </NuxtLink>                            
                             <NuxtLink v-bind:to="rm.link" v-else-if="rm.id === 3">
                                 <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color" />
                             </NuxtLink>
@@ -87,7 +91,7 @@
             <div class="container mx-auto px-2 flex justify-between items-center flex-col md:flex-row py-8 gap-4">
                 <div class="newsletter w-full md:w-1/4">
                     <p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
-                    <form v-on:submit="subscribeSubmitHandler">
+                    <form v-on:submit.prevent="subscribeSubmitHandler">
                         <div class="input-group w-full flex items-center">
                             <div
                                 class="icon-holder bg-teal-900 outline-0 py-2 border-y border-teal-100/25 text-teal-50 placeholder:text-teal-100/50 w-1/12 text-center">
@@ -95,11 +99,12 @@
                             </div>
                             <input required="true" type="email" id="user-first-name"
                                 class="bg-teal-900 outline-0 px-3 py-2 border-y border-teal-100/25 px-1 text-teal-50 placeholder:text-teal-100/50 w-10/12"
-                                placeholder="Enter your email">
-                            <div
-                                class="icon-holder bg-teal-900 outline-0 py-2 border-y border-teal-100/25 text-teal-50 placeholder:text-teal-100/50 w-1/12">
+                                placeholder="Enter your email" v-model="wishlistEmailAdd">
+                            <button
+                                class="icon-holder bg-teal-900 outline-0 py-2 border-y border-teal-100/25 text-teal-50 placeholder:text-teal-100/50 w-1/12"
+                                type="submit">
                                 <Icon name="mdi-light:arrow-right-circle" color="white" class="p-0" size="20" />
-                            </div>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -128,6 +133,7 @@ import useSettingsStore from '../stores/SettingsStore';
 import useElementsStore from '../stores/ElementsStore';
 import useUserStore from '../stores/UserStore';
 import useCategoryStore from '../stores/CategoryStore';
+import useWishlistStore from '../stores/WishlistStore';
 // https://dev.to/rafaelmagalhaes/pinia-and-nuxt-3-4ij5
 
 // Local State
@@ -143,10 +149,12 @@ const categoryStore = useCategoryStore();
 const settingsStore = useSettingsStore();
 const elementsStore = useElementsStore();
 const userStore = useUserStore();
+const wishlistStore = useWishlistStore();
 
 const { logoUrl, socialLinks, address } = storeToRefs(settingsStore);
 const { menus, rightMenus, shadowOverflow, showMobileMenu, showSearchBar } = storeToRefs(elementsStore);
-const { isAuthenticated } = storeToRefs(userStore);
+const { isAuthenticated, userInfo } = storeToRefs(userStore);
+const { wishlistEmailAdd } = storeToRefs(wishlistStore);
 
 // Show or hide elements
 const displaySearchBarHandler = (e: Event) => {
@@ -192,32 +200,26 @@ const wrapperHandler = (e: Event) => {
     */
 }
 
-// document.addEventListener('click', (e: Event) => {
-//     // Exceptional elements
-//     const el = sidebarOpenSvgEl;
-//     console.log(sidebarOpenSvgEl.value.id);
-
-//     const exceptionalElements: HTMLElement[] = [sidebarOpenSvgEl.value];
-//     const clickedEl: HTMLElement = e.target;
-//     if (exceptionalElements.includes(clickedEl)) return;
-
-//     // const outsideClick = !elem.contains(event.target);
-//     // const withinBoundary = domCE.composedPath().includes(notificationBarEl.current);  
-//     if (!sidebarDivEl.value) return;
-//     const withinBoundary = e.composedPath().includes(sidebarDivEl.value);
-//     if (!withinBoundary) {
-//         elementsStore.closeMobileMenu();
-//         elementsStore.closeFilterBar();
-//     }
-// });
 
 const searchHandler = async (e: Event) => {
     showSearchBar.value = !showSearchBar.value;
     await navigateTo(`/search/?q=${state.q}`);
 }
 
-const subscribeSubmitHandler = (e: Event) => {
+const subscribeSubmitHandler = async (e: Event) => {
+    // wishlistEmailAdd
+    const { data: userInfo, error: userError, refresh: refreshRequest, status: userStatus } = await useFetch(`${BACKEND_URL}/wishlist/new/`, {
+        key: `wishlist-${new Date().getSeconds()}${new Date().getMilliseconds()}`,
+        method: 'POST',
+        body: {
+            email: wishlistEmailAdd
+        }
+    });
 
+    if (userStatus.value === 'success' && userInfo.value) {
+        const formElement = e.target as HTMLFormElement;
+        formElement.reset();
+    }
 }
 
 

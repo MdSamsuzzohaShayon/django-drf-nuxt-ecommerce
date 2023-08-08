@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto px-2 static">
+    <div class="container mx-auto px-2 static min-h-80">
         <!-- <h2>Admin Panel</h2> -->
         <div class="flex justify-between flex-col md:flex-row admin-panel">
             <div class="left-side-bar w-full md:w-2/12 sticky top-0 h-fit md:h-screen bg-white">
@@ -34,6 +34,14 @@
                     <OrderList />
                 </div>
                 <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 5">
+                    <h2>Wishlist</h2>
+                    <WishlistList />
+                </div>
+                <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 6">
+                    <h2>Inbox</h2>
+                    <ContactList />
+                </div>
+                <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 7">
                     <h2>User</h2>
                     <UserList />
                 </div>

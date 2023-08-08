@@ -1,15 +1,7 @@
 <template>
     <div class="container mx-auto px-2 ">
         <div class="message-content w-full mt-8">
-            <p class="text-red-900 px-4 py-2 capitalize w-full bg-red-100 text-red-900" v-for="message in errorMessageList">
-                {{ message }} <span class="float-right">
-                    <Icon name="grommet-icons:close" size="20" v-on:click.prevent="elementStore.resetErrorMessageList()" />
-                </span> </p>
-            <p class="text-teal-900 px-4 py-2 capitalize" v-for="message in successMessageList">{{ message }} <span
-                    class="float-right">
-                    <Icon name="grommet-icons:close" size="20"
-                        v-on:click.prevent="elementStore.resetSuccessMessageList()" />
-                </span> </p>
+            <Message />
         </div>
         <div class="main-content flex flex-col md:flex-row justify-start gap-8">
             <div class="sign-in w-full md:w-2/5">

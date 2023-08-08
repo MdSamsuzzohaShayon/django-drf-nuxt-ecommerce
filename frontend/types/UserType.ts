@@ -50,6 +50,14 @@ interface UserRequestSuccessResInt{
     detail: string;
 }
 
+interface WishlistInt{
+    id: number;
+    email: string;
+    preview: boolean;
+    created_at: string;
+    updated_at: string;
+}
+
 
 export {
     UserSignupInterface,
@@ -58,5 +66,6 @@ export {
     UserAddressInterface,
     AddressAddUpdateInterface,
     UserTokenInterface,
-    UserRequestSuccessResInt
+    UserRequestSuccessResInt,
+    WishlistInt
 }

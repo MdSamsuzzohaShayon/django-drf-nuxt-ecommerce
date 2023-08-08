@@ -10,11 +10,13 @@ class Order(models.Model):
     PENDING = "PG"
     SHIPPING = "SG"
     COMPLETED = "CD"
+    CANCELED = "CL"
 
     STATUS_CHOICES = [
         (PENDING, "PENDING"),
         (SHIPPING, "SHIPPING"),
-        (COMPLETED, "COMPLETED")
+        (COMPLETED, "COMPLETED"),
+        (CANCELED, "CANCELED"),
     ]
 
     status = models.CharField( max_length=2, choices=STATUS_CHOICES, default=PENDING)
@@ -26,3 +28,6 @@ class Order(models.Model):
     total = models.IntegerField() # Price * Quantity
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.status

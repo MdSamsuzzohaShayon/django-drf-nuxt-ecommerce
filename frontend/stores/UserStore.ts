@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { UserSignupInterface, UserSigninInterface, UserInfoInterface, UserAddressInterface, AddressAddUpdateInterface } from '../types/UserType';
+import { UserSignupInterface, UserSigninInterface, UserInfoInterface, UserAddressInterface, AddressAddUpdateInterface, WishlistInt } from '../types/UserType';
 
 const useUserStore = defineStore('userStore', {
     state: () => ({
@@ -33,7 +33,7 @@ const useUserStore = defineStore('userStore', {
             area: '',
             user: 0,
         } as AddressAddUpdateInterface,
-        userList: [] as UserInfoInterface[],
+        userList: [] as UserInfoInterface[],        
         
         emailOfUser: '' as string, // For forget password
     }),

@@ -70,4 +70,7 @@ class Address(models.Model):
     country = models.CharField(max_length=100, default="Bangladesh", blank=True, null=True)
     phone = models.IntegerField(null=True, blank=True)
     area = models.CharField(max_length=255)
+
+    def __str__(self)-> str:
+        return self.area
     

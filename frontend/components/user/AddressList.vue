@@ -3,10 +3,9 @@
         <div class="item mt-4 w-full bg-white" v-for="a in userInfo.address">
             <div class="p-4 flex justify-between items-center">
                 <div class="text-detail">
-                    <p>Area: {{ a.area }}</p>
-                    <p>City: {{ a.city }}</p>
-                    <p>Country: {{ a.country }}</p>
-                    <p>Phone: {{ a.phone }}</p>
+                    <p>ID: {{ a.id }}</p>
+                    <p>Area: {{ a.area }}, City: {{ a.city }}</p>
+                    <p>Country: {{ a.country }}, Phone: {{ a.phone }}</p>
                 </div>
                 <div class="contaoller">
                     <p class="cursor-pointer text-teal-900" v-on:click.prevent="selectAddressToUpdate(a.id)">Update</p>

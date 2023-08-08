@@ -19,15 +19,18 @@
                     <td class="p-2 text-center border border-teal-900/50">{{ order.product }}</td>
                     <td class="p-2 text-center border border-teal-900/50 capitalize">{{ order.status }}</td>
                     <td class="p-2 text-center border border-teal-900/50">{{ order.quantity }}</td>
-                    <td class="p-2 text-center border border-teal-900/50">{{ `${order.address.area}, ${order.address.city}, ${order.address.phone}` }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">{{ `${order.address.area}, ${order.address.city},
+                                            ${order.address.phone}` }}</td>
                     <td class="p-2 text-center border border-teal-900/50">{{ order.total }}</td>
-                    <td class="p-2 text-center border border-teal-900/50 flex flex-col">
-                        <p class="cursor-pointer text-red-900" v-on:click.prevent="deleteOrderHandler(order.id)">Cancel</p>
-                        <NuxtLink v-bind:to="`/orders/${order.id}/`">
+                    <td class="p-2 text-center border border-teal-900/50">
+                        <p class="cursor-pointer text-red-900" v-if="order.status === 'PENDING'"
+                            v-on:click.prevent="cancelOrderHandler(order.id)">Cancel</p>
+                        <NuxtLink v-bind:to="`#`">
                             <p class="cursor-pointer text-teal-900">View</p>
-                            <!-- <Icon class="pr-2" size="20" name="bytesize:eye" color="teal" /> -->
                         </NuxtLink>
-                        <p v-if="userInfo.is_staff" class="cursor-pointer text-teal-900" v-on:click.prevent="updateOrderHandler(order.id)">Update</p>
+                        <!-- <Icon class="pr-2" size="20" name="bytesize:eye" color="teal" /> -->
+                        <p v-if="userInfo.is_staff" class="cursor-pointer text-teal-900"
+                            v-on:click.prevent="updateOrderHandler(order.id)">Update</p>
                         <!-- <Icon v-if="userInfo.is_staff" class="pr-2" size="20" name="line-md:edit" v-on:click.prevent="updateOrderHandler(order.id)"
                             color="teal" /> -->
                     </td>
@@ -43,7 +46,7 @@ import { storeToRefs } from 'pinia';
 import useOrderStore from '../../stores/OrderStore';
 import useProductStore from '../../stores/ProductStore';
 import useUserStore from '../../stores/UserStore';
-import { OrderStatus, OrganizedOrderInterface } from '../../types/ProductOrderType';
+import { OrderStatus, OrganizedOrderInterface, OrderInterface } from '../../types/ProductOrderType';
 
 const ordersStore = useOrderStore();
 const productStore = useProductStore();
@@ -52,11 +55,23 @@ const userStore = useUserStore();
 const { orderList } = storeToRefs(ordersStore);
 const { userInfo } = storeToRefs(userStore);
 
-const deleteOrderHandler = (pId: number | null) => {
-    console.log("Delete order -> ", pId);
+const cancelOrderHandler = async (oId: number | null) => {
+    const token = useCookie('token');
+    // @ts-ignore
+    const { access: accessToken } = token.value;
+    const { data: orderData, error: orderError, refresh: orderRefresh, status: orderStatus } = await useFetch(`${BACKEND_URL}/orders/cancel/${oId}/`, {
+        key: oId + '-' + new Date().getSeconds() + '-' + new Date().getMilliseconds(),
+        method: "PUT",
+        headers: {
+            "Authorization": `Bearer ${accessToken}`
+        }
+    });
+    if (orderStatus.value === 'success' && orderData.value) {
+        if (oId) ordersStore.cancelAnOrder(oId);
+    }
 }
 
-const updateOrderHandler = (pId: number) => {
+const updateOrderHandler = (oId: number) => {
     // ordersStore.setOrderUpdate(true);
     // ordersStore.setOrderToUpdate(pId);
 }
@@ -74,16 +89,18 @@ const organizedOrders = () => {
             status = "COMPLETED";
         } else if (ol[i].status === OrderStatus.SHIPPING) {
             status = "SHIPPING";
+        } else if (ol[i].status === OrderStatus.CANCELED) {
+            status = "CANCELED";
         }
 
-        const findProduct = productStore.productList.find(p => p.id === ol[i].product);
+        // const findProduct = productStore.productList.find(p => p.id === ol[i].product);
         // console.log(userInfo.value.address[i]);
 
         const newOrder: OrganizedOrderInterface = {
             id: ol[i].id,
             status: status,
             is_paid: ol[i].is_paid,
-            product: findProduct ? findProduct.title : '',
+            product: ol[i].product.title,
             quantity: ol[i].quantity,
             // address: `${userInfo.value.address[0]?.area}, ${userInfo.value.address[0]?.city}`,
             address: ol[i].address,

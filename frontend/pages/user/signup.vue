@@ -2,6 +2,7 @@
     <div class="container mx-auto px-2 flex justify-center min-h-80">
         <div class="sign-in w-full md:w-2/5">
             <h1 class="pt-8">Register</h1>
+            <Message />
             <form class="flex flex-col gap-4 mt-8" v-on:submit.prevent="signupHandler">
                 <div class="input-group w-full">
                     <input required="true" type="text" id="user-first-name"
@@ -37,9 +38,6 @@
                 </div>
             </form>
         </div>
-        <br>
-        <p class="text-red-900 px-4 py-2 capitalize" v-for="message in errorMessageList">{{ message }}</p>
-        <p class="text-teal-900 px-4 py-2 capitalize" v-for="message in successMessageList">{{ message }}</p>
     </div>
 </template>
 

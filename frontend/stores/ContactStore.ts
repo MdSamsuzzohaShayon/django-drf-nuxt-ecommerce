@@ -9,26 +9,21 @@ const useContactStore = defineStore('contactStore', {
             message: ''
         } as WillContactInterface,
         contactList: [] as ContactFetchedInterface[],
-        organizedContactList: [] as ContactFetchedInterface[],
     }),
     actions: {
-        deleteContact(catId: number) {
-            this.contactList = this.contactList.filter((c: ContactFetchedInterface) => c.id !== catId);
+        previewAContact(catId: number) {
+            // make preview true
         },
-        async fetchContacts(access: string) {
-            const { data: productContacts, refresh: refreshRequest } = await useFetch<ContactFetchedInterface[]>(`${BACKEND_URL}/contacts/user/`, {
+        async fetchContacts(accessToken: string) {
+            const { data: contactData, refresh: refreshRequest, status: contactStatus } = await useFetch<ContactFetchedInterface[]>(`${BACKEND_URL}/contacts/list/`, {
+                key: `contacts-${new Date().getSeconds()}-${new Date().getMilliseconds()}`,
                 headers: {
-                    "Authorization": "Bearer " + access
+                    "Authorization": "Bearer " + accessToken
                 }
             });
-            await refreshRequest();
-            // console.log(productContacts.value);
-
-
-            if (productContacts.value) {
-                this.contactList = productContacts.value
+            if(contactStatus.value === 'success' && contactData.value){
+                this.contactList = contactData.value;
             }
-
         },
     },
     getters: {

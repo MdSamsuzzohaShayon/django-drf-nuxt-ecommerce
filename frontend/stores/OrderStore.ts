@@ -10,6 +10,14 @@ const useOrderStore = defineStore('orderStore', {
         addNewOrder(newOrder: OrderInterface){
             this.orderList.push(newOrder);
         },
+        cancelAnOrder(orderId: number){
+            const findOrderIndex = this.orderList.findIndex((order)=> order.id == orderId);
+            if(findOrderIndex){
+                const orderObj = {...this.orderList[findOrderIndex]};
+                orderObj.status = OrderStatus.CANCELED;
+                this.orderList[findOrderIndex] = orderObj;
+            }
+        },
         deleteOrder(catId: number) {
             this.orderList = this.orderList.filter((c: OrderInterface) => c.id !== catId);
         },

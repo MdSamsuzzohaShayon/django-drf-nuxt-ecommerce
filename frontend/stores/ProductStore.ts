@@ -48,6 +48,7 @@ const useProductStore = defineStore('productStore', {
             }
             // update object
             const updatedObj = { ...this.productList[findProductIndex], ...this.productUpdateAdd };
+            // @ts-ignore
             this.productList[findProductIndex] = updatedObj;
         },
         addItemToCart(cartItem: CartItemInterface) {

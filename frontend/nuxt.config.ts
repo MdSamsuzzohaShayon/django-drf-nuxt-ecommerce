@@ -37,6 +37,9 @@ export default defineNuxtConfig({
     { path: '~/components/order', extensions: ['vue']},
     { path: '~/components/setting', extensions: ['vue']},
     { path: '~/components/user', extensions: ['vue']},
+    { path: '~/components/element', extensions: ['vue']},
+    { path: '~/components/wishlist', extensions: ['vue']},
+    { path: '~/components/contacts', extensions: ['vue']},
     '~/components'
   ]
 })

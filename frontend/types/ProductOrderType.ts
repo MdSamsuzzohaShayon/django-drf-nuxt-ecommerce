@@ -1,16 +1,18 @@
 import { UserAddressInterface } from "./UserType";
+import { ProductInterface } from './ProductType';
 
 enum OrderStatus {
     PENDING = "PG",
     SHIPPING = "SG",
     COMPLETED = "CD",
+    CANCELED = "CL",
 }
 
 interface OrderInterface {
     id: number;
-    status: OrderStatus.PENDING | OrderStatus.SHIPPING | OrderStatus.COMPLETED;
+    status: OrderStatus.PENDING | OrderStatus.SHIPPING | OrderStatus.COMPLETED | OrderStatus.CANCELED;
     is_paid: boolean;
-    product: number;
+    product: ProductInterface;
     address: UserAddressInterface;
     quantity: number;
     total: number;
