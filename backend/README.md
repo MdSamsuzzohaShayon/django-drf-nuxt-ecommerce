@@ -86,6 +86,7 @@
 ### Reference
  - serializing Objects - > https://www.django-rest-framework.org/api-guide/serializers/#serializing-objects
  - Serializers allow complex data such as querysets and model instances to be converted to native Python datatypes that can then be easily rendered into JSON, XML or other content types.
+ - Django models overriding 
  - The ModelSerializer class provides a shortcut that lets you automatically create a Serializer class with fields that correspond to the Model fields.
  - Field-level validation -> https://www.django-rest-framework.org/api-guide/serializers/#field-level-validation
  - Object-level validation -> https://www.django-rest-framework.org/api-guide/serializers/#object-level-validation

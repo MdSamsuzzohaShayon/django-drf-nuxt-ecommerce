@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os 
+import logging
 from pathlib import Path
 from dotenv import load_dotenv
 from datetime import timedelta
@@ -30,7 +31,6 @@ DEBUG = True
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     "corsheaders",
+    'cloudinary',
 
     # Internal Apps
     'products',
@@ -213,3 +214,25 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+
+
+
+CLOUDINARY = {
+  'cloud_name': os.environ.get('CLOUDINARY_CLOUD_NAME'),  
+  'api_key': os.environ.get('CLOUDINARY_API_KEY'),  
+  'api_secret': os.environ.get('CLOUDINARY_API_SECRET'),  
+}
+
+# cloudinary.config( 
+#   cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME'), 
+#   api_key = os.environ.get('CLOUDINARY_API_KEY'), 
+#   api_secret = os.environ.get('CLOUDINARY_API_SECRET'),
+# #   secure = True
+# )
+
+
+
+
+
+
+

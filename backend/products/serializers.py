@@ -40,8 +40,31 @@ class ProductUpdateSerializer(serializers.ModelSerializer):
         model = Product
         fields = "__all__"
         # exclude = ["id"]
+
+
+class ProductCreateSerializer(serializers.ModelSerializer):
+    image1 = serializers.CharField(read_only=True)
+    image2 = serializers.CharField(read_only=True)
+    image3 = serializers.CharField(read_only=True)
+    image4 = serializers.CharField(read_only=True)
+
+    image1file = serializers.ImageField(write_only=True, required=False) # We must provide write only in order to pop it
+    image2file = serializers.ImageField(write_only=True, required=False) # We must provide write only in order to pop it
+    image3file = serializers.ImageField(write_only=True, required=False) # We must provide write only in order to pop it
+    image4file = serializers.ImageField(write_only=True, required=False) # We must provide write only in order to pop it
+
+    class Meta:
+        model = Product
+        fields = "__all__"
     
 
+
+class CategoryCreateSerializer(serializers.ModelSerializer):
+    image = serializers.CharField(read_only=True)
+    categoryimage = serializers.ImageField(write_only=True) # We must provide write only in order to pop it
+    class Meta:
+        model = Category
+        fields = "__all__"
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

@@ -51,7 +51,7 @@
                     class="w-full bg-white text-teal-950/50  px-3 py-2 border border-teal-950/25 block"> <span>
                         <Icon name="ph:image" size="20" />
                     </span> {{ state.image2Name !== '' ? state.image2Name : 'Image 2' }}</label>
-                <input v-bind:required="productUpdate === false ? true : false" type="file" id="product-image2"
+                <input type="file" id="product-image2"
                     name="image2" ref="uploadImage2" class="hidden" v-on:input="uploadFileChangeHandler">
             </div>
             <div class="input-group w-full">
@@ -59,7 +59,7 @@
                     class="w-full bg-white text-teal-950/50  px-3 py-2 border border-teal-950/25 block"> <span>
                         <Icon name="ph:image" size="20" />
                     </span> {{ state.image3Name !== '' ? state.image3Name : 'Image 3' }}</label>
-                <input v-bind:required="productUpdate === false ? true : false" type="file" id="product-image3"
+                <input type="file" id="product-image3"
                     name="image3" ref="uploadImage3" class="hidden" v-on:input="uploadFileChangeHandler">
             </div>
             <div class="input-group w-full">
@@ -67,7 +67,7 @@
                     class="w-full bg-white text-teal-950/50  px-3 py-2 border border-teal-950/25 block"> <span>
                         <Icon name="ph:image" size="20" />
                     </span> {{ state.image4Name !== '' ? state.image4Name : 'Image 4' }}</label>
-                <input v-bind:required="productUpdate === false ? true : false" type="file" id="product-image4"
+                <input type="file" id="product-image4"
                     name="image4" ref="uploadImage4" class="hidden" v-on:input="uploadFileChangeHandler">
             </div>
             <!-- <div class="input-group w-full">

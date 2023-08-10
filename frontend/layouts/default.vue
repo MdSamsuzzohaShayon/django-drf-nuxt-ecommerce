@@ -52,7 +52,7 @@
                             </NuxtLink>
                             <NuxtLink to="/admin/" v-else-if="rm.id === 3 && userInfo.is_staff">
                                 <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color" />
-                            </NuxtLink>                            
+                            </NuxtLink>
                             <NuxtLink v-bind:to="rm.link" v-else-if="rm.id === 3">
                                 <Icon v-bind:name="rm.name" size="20" v-bind:color="rm.color" />
                             </NuxtLink>
@@ -99,7 +99,7 @@
                             </div>
                             <input required="true" type="email" id="user-first-name"
                                 class="bg-teal-900 outline-0 px-3 py-2 border-y border-teal-100/25 px-1 text-teal-50 placeholder:text-teal-100/50 w-10/12"
-                                placeholder="Enter your email" v-model="wishlistEmailAdd">
+                                placeholder="Enter your email" v-on:change="wishlistEmailChangeHandler">
                             <button
                                 class="icon-holder bg-teal-900 outline-0 py-2 border-y border-teal-100/25 text-teal-50 placeholder:text-teal-100/50 w-1/12"
                                 type="submit">
@@ -206,19 +206,29 @@ const searchHandler = async (e: Event) => {
     await navigateTo(`/search/?q=${state.q}`);
 }
 
+const wishlistEmailChangeHandler = (e: Event) => {
+    const inputEl = e.target as HTMLInputElement;
+    // console.log(inputEl.value);
+    wishlistStore.setWishlistEmailAdd(inputEl.value);
+}
+
 const subscribeSubmitHandler = async (e: Event) => {
+    e.preventDefault();
     // wishlistEmailAdd
+    console.log("Submit - 1");
     const { data: userInfo, error: userError, refresh: refreshRequest, status: userStatus } = await useFetch(`${BACKEND_URL}/wishlist/new/`, {
         key: `wishlist-${new Date().getSeconds()}${new Date().getMilliseconds()}`,
         method: 'POST',
         body: {
-            email: wishlistEmailAdd
+            email: wishlistEmailAdd.value
         }
     });
+
 
     if (userStatus.value === 'success' && userInfo.value) {
         const formElement = e.target as HTMLFormElement;
         formElement.reset();
+        wishlistStore.setWishlistEmailAdd('');
     }
 }
 

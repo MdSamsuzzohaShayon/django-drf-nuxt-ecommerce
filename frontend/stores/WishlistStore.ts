@@ -7,6 +7,9 @@ const useWishlistStore = defineStore('wishlistStore', {
         wishlistEmailAdd: '' as string,
     }),
     actions: {
+        setWishlistEmailAdd(emailAddress: string){
+            this.wishlistEmailAdd = emailAddress;
+        },
         deleteWishlist(catId: number) {
             this.wishlistList = this.wishlistList.filter((c: WishlistInterface) => c.id !== catId);
         },

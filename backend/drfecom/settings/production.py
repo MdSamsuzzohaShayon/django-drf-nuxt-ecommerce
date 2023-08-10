@@ -2,6 +2,16 @@ from .base import *
 
 ALLOWED_HOSTS = ['*']
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('SUPABASE_DB_NAME'),
+        'USER': os.environ.get('SUPABASE_DB_USER'),
+        'PASSWORD': os.environ.get('SUPABASE_DB_PASSWORD'),
+        'HOST': os.environ.get('SUPABASE_DB_HOST'),
+        'PORT': os.environ.get('SUPABASE_DB_PORT'),
+    }
+}
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'your_smtp_host'
