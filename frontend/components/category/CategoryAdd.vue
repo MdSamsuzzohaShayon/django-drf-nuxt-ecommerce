@@ -50,7 +50,7 @@ const uploadFileChangeHandler = (e: Event) => {
     // @ts-ignore
     state[`${fileInput.name}Name`] = fileInput.files[0].name;
     if (fileInput.files) {
-        formData.set('image', fileInput.files[0]);
+        formData.set('categoryimage', fileInput.files[0]);
     }
 }
 

@@ -9,7 +9,7 @@ interface ProductBaseInterface {
 }
 
 interface ProductAddUpdateInterface {
-    id: number | null;
+    id?: number | null;
     title: string;
     price: number | null;
     discount_price: number | null;

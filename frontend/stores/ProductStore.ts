@@ -2,6 +2,16 @@
 import { defineStore } from "pinia";
 import { ProductInterface, ProductFilterInterface, ProductFilterOptionalInterface, ProductAddUpdateInterface, CartItemInterface } from '../types/ProductType';
 
+
+const initialProductUpdateAdd: ProductAddUpdateInterface = {
+    title: '',
+    price: null,
+    discount_price: null,
+    total_stock: null,
+    description: '',
+    category: 1,
+};
+
 const useProductStore = defineStore('productStore', {
     state: () => ({
         productList: [] as ProductInterface[],
@@ -11,14 +21,7 @@ const useProductStore = defineStore('productStore', {
             total_stock: null,
             category: null
         } as ProductFilterInterface,
-        productUpdateAdd: {
-            title: '',
-            price: null,
-            discount_price: null,
-            total_stock: null,
-            description: '',
-            category: 1,
-        } as ProductAddUpdateInterface,
+        productUpdateAdd: initialProductUpdateAdd as ProductAddUpdateInterface,
         productSingle: {} as ProductInterface,
         productUpdate: false as boolean,
         // selectProductToUpdate: {} as ProductInterface,
@@ -36,6 +39,9 @@ const useProductStore = defineStore('productStore', {
             if (findProduct) {
                 this.productUpdateAdd = findProduct;
             }
+        },
+        resetProductUpdateAdd() {
+            this.productUpdateAdd = initialProductUpdateAdd;
         },
         addNewProduct(newProduct: ProductInterface) {
             this.productList.push(newProduct);
@@ -82,9 +88,9 @@ const useProductStore = defineStore('productStore', {
             const { data: products, status: productStatus, refresh: refreshFetch } = await useFetch<ProductInterface>(url, { key: pId + "" });
             if (productStatus.value === 'success' && products.value) {
                 this.productSingle = products.value;
-            }else{
+            } else {
                 // @ts-ignore
-                throw createError({statusCode: 404, statusMessage: "Product not found", fetal: true});
+                throw createError({ statusCode: 404, statusMessage: "Product not found", fetal: true });
             }
         },
         async fetchProducts(q: string | null = null) {

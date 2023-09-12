@@ -44,7 +44,7 @@
                         <Icon name="ph:image" size="20" />
                     </span> {{ state.image1Name !== '' ? state.image1Name : 'Image 1' }}</label>
                 <input v-bind:required="productUpdate === false ? true : false" type="file" id="product-image1"
-                    name="image1" ref="uploadImage1" class="hidden" v-on:input="uploadFileChangeHandler">
+                    name="image1file" ref="uploadImage1" class="hidden" v-on:input="uploadFileChangeHandler">
             </div>
             <div class="input-group w-full">
                 <label for="product-image2"
@@ -52,7 +52,7 @@
                         <Icon name="ph:image" size="20" />
                     </span> {{ state.image2Name !== '' ? state.image2Name : 'Image 2' }}</label>
                 <input type="file" id="product-image2"
-                    name="image2" ref="uploadImage2" class="hidden" v-on:input="uploadFileChangeHandler">
+                    name="image2file" ref="uploadImage2" class="hidden" v-on:input="uploadFileChangeHandler">
             </div>
             <div class="input-group w-full">
                 <label for="product-image3"
@@ -60,7 +60,7 @@
                         <Icon name="ph:image" size="20" />
                     </span> {{ state.image3Name !== '' ? state.image3Name : 'Image 3' }}</label>
                 <input type="file" id="product-image3"
-                    name="image3" ref="uploadImage3" class="hidden" v-on:input="uploadFileChangeHandler">
+                    name="image3file" ref="uploadImage3" class="hidden" v-on:input="uploadFileChangeHandler">
             </div>
             <div class="input-group w-full">
                 <label for="product-image4"
@@ -68,7 +68,7 @@
                         <Icon name="ph:image" size="20" />
                     </span> {{ state.image4Name !== '' ? state.image4Name : 'Image 4' }}</label>
                 <input type="file" id="product-image4"
-                    name="image4" ref="uploadImage4" class="hidden" v-on:input="uploadFileChangeHandler">
+                    name="image4file" ref="uploadImage4" class="hidden" v-on:input="uploadFileChangeHandler">
             </div>
             <!-- <div class="input-group w-full">
                 <input v-bind:required="productUpdate === false ? true : false" type="file" id="product-image4"
@@ -149,9 +149,9 @@ const productAddHandler = async (e: Event) => {
         formData.set(k, v);
     }
     // @ts-ignore
-    for (const pair of formData.entries()) {
-        console.log(`${pair[0]}, ${pair[1]}`);
-    }
+    // for (const pair of formData.entries()) {
+    //     console.log(`${pair[0]}, ${pair[1]}`);
+    // }
 
     const token = useCookie('token');
     // @ts-ignore
@@ -170,7 +170,7 @@ const productAddHandler = async (e: Event) => {
             "Authorization": `Bearer ${accessToken}`
         }
     });
-    console.log({ data: data.value, pending: pending.value, error: error.value, refresh: refresh, status: status.value });
+    // console.log({ data: data.value, pending: pending.value, error: error.value, refresh: refresh, status: status.value });
     if (status.value === 'success' && data.value) {
         // Add a product to product list
         if (productUpdate.value === true && productUpdateAdd.value.id) {
@@ -180,6 +180,7 @@ const productAddHandler = async (e: Event) => {
         }
         const formElement = e.target as HTMLFormElement;
         formElement.reset();
+        productStore.resetProductUpdateAdd();
     } else {
         elementStore.setErrorMessageList([JSON.stringify(error.value)]);
     }

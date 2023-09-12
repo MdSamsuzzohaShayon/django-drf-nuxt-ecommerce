@@ -5,7 +5,9 @@
 ### Instructions
  - Preload pages
  - Add **load more** button
+ - Loader for making any api requests
  - Page transition and Animation
+ - Change status by admin
  - Fix image size in single product page
  - Show total Cart items on the menu
  - Use Supabase for database solution

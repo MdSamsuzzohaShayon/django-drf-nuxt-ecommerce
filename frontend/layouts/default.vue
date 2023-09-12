@@ -203,6 +203,7 @@ const wrapperHandler = (e: Event) => {
 
 const searchHandler = async (e: Event) => {
     showSearchBar.value = !showSearchBar.value;
+    elementsStore.setShowSearchBar(false);
     await navigateTo(`/search/?q=${state.q}`);
 }
 
