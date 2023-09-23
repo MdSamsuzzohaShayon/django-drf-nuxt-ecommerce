@@ -25,23 +25,28 @@
                     <CategoryList />
                 </div>
                 <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 3">
+                    <h2>Delivery Place</h2>
+                    <DeliveryPlaceAdd/>
+                    <DeliveryPlaceList />
+                </div>
+                <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 4">
                     <h2>Setting</h2>
                     <SettingAdd />
                 </div>
-                <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 4">
+                <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 5">
                     <h2>Order</h2>
                     <!-- <OrderDetail /> -->
                     <OrderList />
                 </div>
-                <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 5">
+                <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 6">
                     <h2>Wishlist</h2>
                     <WishlistList />
                 </div>
-                <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 6">
+                <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 7">
                     <h2>Inbox</h2>
                     <ContactList />
                 </div>
-                <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 7">
+                <div class="selected-item pt-4 md:pt-8 px-0 md:px-4" v-else-if="selectedDSID === 8">
                     <h2>User</h2>
                     <UserList />
                 </div>
@@ -59,6 +64,7 @@ import useElementStore from '../../stores/ElementsStore';
 import useProductStore from '../../stores/ProductStore';
 import useOrderStore from '../../stores/OrderStore';
 import useUserStore from '../../stores/UserStore';
+import useDeliveryPlaceStore from '../../stores/DeliveryPlaceStore';
 
 // Meta
 definePageMeta({
@@ -70,6 +76,7 @@ const elementStore = useElementStore();
 const productsStore = useProductStore();
 const orderStore = useOrderStore();
 const userStore = useUserStore();
+const deliveryPlaceStore = useDeliveryPlaceStore();
 
 const { dashboardSidebar, selectedDSID, errorMessageList, successMessageList, addProduct, showProductList } = storeToRefs(elementStore);
 
@@ -77,6 +84,8 @@ const token = useCookie("token");
 
 const fetchAtBeginning = [];
 fetchAtBeginning.push(productsStore.fetchProducts());
+fetchAtBeginning.push(deliveryPlaceStore.fetchAllPlaces());
+
 if (token.value) {
     // @ts-ignore
     const { access } = token.value;

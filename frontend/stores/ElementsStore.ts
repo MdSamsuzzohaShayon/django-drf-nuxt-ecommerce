@@ -19,11 +19,12 @@ const useElementStore = defineStore("elementsStore", {
         dashboardSidebar: [
             { id: 1, name: "bx:box", text: "Product" },
             { id: 2, name: "simple-line-icons:grid", text: "Category" },
-            { id: 3, name: "et:gears", text: "Setting" },
-            { id: 4, name: "simple-line-icons:handbag", text: "Order" },
-            { id: 5, name: "la:clipboard-list", text: "Wishlist" },
-            { id: 6, name: "simple-icons:minutemailer", text: "Inbox" },
-            { id: 7, name: "simple-line-icons:user", text: "User" },
+            { id: 3, name: "material-symbols:local-shipping-outline-sharp", text: "Delivery" },
+            { id: 4, name: "et:gears", text: "Setting" },
+            { id: 5, name: "simple-line-icons:handbag", text: "Order" },
+            { id: 6, name: "la:clipboard-list", text: "Wishlist" },
+            { id: 7, name: "simple-icons:minutemailer", text: "Inbox" },
+            { id: 8, name: "simple-line-icons:user", text: "User" },
         ] as SidebarMenuInterface[],
         userDashboardSidebar: [
             { id: 1, name: "simple-line-icons:user", text: "Profile" },

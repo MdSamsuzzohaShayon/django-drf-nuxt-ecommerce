@@ -7,7 +7,7 @@ from rest_framework.validators import ValidationError
 from .serializers import OrderSerializer, OrderCancelSerializer, OrderListSerializer
 from accounts.serializers import AddressSerializer
 from .models import Order
-from products.models import Product
+from products.models import Product, DeliveryPlace
 from accounts.mixins import GeneralUserPermissionMixin, StaffEditorPermissionMixin
 from django.shortcuts import get_object_or_404
 
@@ -17,13 +17,24 @@ class CreateOrderView(GeneralUserPermissionMixin, CreateAPIView):
     queryset = Order.objects.all()
 
     def perform_create(self, serializer):
-        # print(self.request.data)
+        print("All data ----> ",self.request.data)
         quantity = self.request.data.get('quantity')
         product_id = self.request.data.get('product')
+        city_id = self.request.data.get('city')
         # Access product and quentity and ultiply them to get total
         product = Product.objects.get(id=product_id)
-        # print(product.discount_price, quantity)
-        total = product.discount_price * quantity if product.discount_price else product.price
+        city = DeliveryPlace.objects.get(id=city_id)
+        # print("Get category from here ",product.category.shipping_charge)
+        # print("Get price for specific city ", city.price)
+        # (Price * Quantity) + {Delivery Place + Product Category Shipping Price) * Quantity}
+        product_total = product.discount_price * quantity if product.discount_price else product.price
+        delivery_charge = (city.price + product.category.shipping_charge) * quantity
+        total = product_total + delivery_charge
+        print({
+            "product_total": product_total,
+            "delivery_charge": delivery_charge,
+            "total": total
+        })
         serializer.save(buyer=self.request.user, total=total)
         # print(serializer.data)
 

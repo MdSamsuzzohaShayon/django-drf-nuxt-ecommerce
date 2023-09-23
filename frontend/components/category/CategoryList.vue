@@ -2,7 +2,8 @@
     <div class="mt-4">
         <ul>
             <li v-for="cat in categoryList" class="flex justify-between bg-white mb-2 p-2">
-                <p>{{ cat.name }}</p>
+                <p>{{ cat.name }} - ৳{{ cat.shipping_charge }}</p>
+                <p>Update shipping charge</p>
                 <Icon size="20" name="lucide:trash-2" color="red" v-on:click.prevent="deleteCategoryHandler(cat.id)" />
             </li>
         </ul>

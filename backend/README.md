@@ -4,6 +4,8 @@
 
 ### Instructions
  - On delete product or category, images should be deleted from the folder too
+ - A price for a category and a price for a place
+ - Generate Sku code *product_category-product_title-product_variant-product_size*
  - customize django rest framework user password validation
  - Add first name, last name for user
  - Refresh token is not rotating properly
