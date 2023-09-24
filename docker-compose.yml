@@ -1,1 +1,43 @@
-Setup django, nuxtjs, postgressql
+version: '3.9'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+    container_name: backend_con
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - postgres_db
+    command: python manage.py runserver 0.0.0.0:8000
+  
+  postgres_db:
+    image: postgres:15
+    container_name: postgres_con
+    restart: always
+    environment:
+      - POSTGRES_USER=testuser
+      - POSTGRES_PASSWORD=Test1234
+      - POSTGRES_DB=testdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    container_name: adminer_con
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres_db
+
+
+volumes:
+  postgres_data:
+    

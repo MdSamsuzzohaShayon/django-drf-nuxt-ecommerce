@@ -46,10 +46,16 @@
  - SSLCommerz and product delivery change
 
 ### Deployment
- - Docarize the application
+ - Clone code from github
+ - Run Docker container `docker compose up -d --build`
+ - Make migrations and migrate with docker 
+    ```
+    sudo docker compose run backend python manage.py makemigrations
+    sudo docker compose run backend python manage.py migrate
+    ```
+ - Create superuser in django `sudo docker compose run backend python manage.py createsuperuser`
  - Setup postgres database
  - Change environment variables
- - Create superuser in django
  - Remove default django admin 
 
 
