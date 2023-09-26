@@ -11,7 +11,6 @@ from .base import *
 #     }
 # }
 
-# print({"DB------->": os.environ.get('POSTGRES_DB'), "password----------->": os.environ.get('POSTGRES_PASSWORD')})
 # Connecting postgres sql
 DATABASES = {
     'default': {

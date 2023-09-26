@@ -86,7 +86,8 @@ const categoryAddUpdateHandler = async (e: Event) => {
 
   let resStatus = null,
     resError = null;
-  if (categoryUpdate) {
+    
+  if (categoryUpdate && categoryUpdate.value) {
     if (categoryAddUpdate.value.name) formData.set("name", categoryAddUpdate.value.name);
     if (categoryAddUpdate.value.shipping_charge) formData.set("shipping_charge", categoryAddUpdate.value.shipping_charge.toString());
     const { data, pending, error, refresh, status } = await useFetch<ProductCategoryInterface>(

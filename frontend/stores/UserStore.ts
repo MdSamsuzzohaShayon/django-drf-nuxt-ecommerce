@@ -107,7 +107,7 @@ const useUserStore = defineStore('userStore', {
                 }
             });
             await refreshRequest();
-            console.log({ "Error ": userError.value, "Status": userStatus.value, "data": userList.value });
+            // console.log({ "Error ": userError.value, "Status": userStatus.value, "data": userList.value });
             if (userStatus.value === 'success' && userList.value) {
                 this.userList = userList.value;
             }

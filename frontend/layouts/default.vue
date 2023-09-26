@@ -1,5 +1,6 @@
 <template>
     <div v-on:click="wrapperHandler">
+        
         <header class="shadow-sm bg-white">
             <!-- MENU: 1 -> Top offer menu  -->
             <!-- <div class="top-offer-menu bg-teal-300 w-full ">

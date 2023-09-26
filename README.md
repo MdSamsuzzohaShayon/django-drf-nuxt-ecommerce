@@ -45,7 +45,13 @@
 ### Ask about
  - SSLCommerz and product delivery change
 
+### Docker
+ - Copy files from exited container `docker cp <container_id_or_name>:<path_to_file_or_directory_in_container> <path_to_destination_on_host>`
+ - Run project with docker on development `sudo dockercompose -f docker-compose.dev.yml up -d`
+ - Restart nginx `sudo docker compose restart nginx`
+
 ### Deployment
+ - Make docker environment for development and productions
  - Clone code from github
  - Run Docker container `docker compose up -d --build`
  - Make migrations and migrate with docker 
@@ -54,6 +60,8 @@
     sudo docker compose run backend python manage.py migrate
     ```
  - Create superuser in django `sudo docker compose run backend python manage.py createsuperuser`
+ - Setup github actions with docker
+ - Intract with container `sudo docker exec -it con_name sh` use `sh` for alpine based image and use `bash` for others
  - Setup postgres database
  - Change environment variables
  - Remove default django admin 

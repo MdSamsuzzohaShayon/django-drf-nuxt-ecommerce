@@ -4,6 +4,8 @@ services:
   backend:
     build: 
       context: ./backend
+      dockerfile: Dockerfile.dev
+    image: django_image
     container_name: backend_con
     volumes:
       - ./backend:/app
@@ -11,9 +13,44 @@ services:
       - "8000:8000"
     env_file:
       - ./backend/.env
+    networks:
+      - public-net
     depends_on:
       - postgres_db
     command: python manage.py runserver 0.0.0.0:8000
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    image: nuxt_image
+    container_name: frontend_con
+    volumes:
+      - ./frontend:/app
+      - node_modules:/app/node_modules
+    ports:
+      - "3000:3000"
+      - "24678:24678"
+    depends_on:
+      - backend
+    networks:
+      - public-net
+    # command: npm start
+    command: npm run dev
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_con
+    depends_on:
+      - frontend
+    links:
+      - frontend
+    volumes:
+      - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf
+    networks:
+      - public-net
+    ports:
+      - "42080:80"
   
   postgres_db:
     image: postgres:15
@@ -27,6 +64,8 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - public-net
 
   adminer:
     image: adminer
@@ -37,7 +76,13 @@ services:
     depends_on:
       - postgres_db
 
-
+    
 volumes:
   postgres_data:
-    
+  node_modules:
+
+networks:
+  private-net:
+    driver: bridge
+  public-net:
+    driver: bridge
