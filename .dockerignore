@@ -1,6 +1,8 @@
 .gitignore
 docker-compose.yml
 README.md
+deploy.sh
+destroy.sh
 
 backend/.idea
 backend/.venv

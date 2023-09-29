@@ -16,7 +16,10 @@ RUN pip install --upgrade setuptools \
     && pip install --upgrade pip \
     && pip install -r requirements.txt 
 
-RUN export PYENV=development
+RUN export PYENV=production
+
+RUN mkdir -p /opt/djangoprojects/reports/bin/
+
 
 COPY . .
 

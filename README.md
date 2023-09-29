@@ -28,6 +28,7 @@
  - ✅✅ One admin panel for admin and staff
  - One customer dashboard
  - Save tokens in client side cookies
+ - Stop `gunicorn` using `netstat -ntlp` and `kill -9 PID`
 
 ### SSLCommerz
  - [Create sandbox account for testing and for production create real account](https://developer.sslcommerz.com/doc/v4/)

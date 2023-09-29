@@ -16,10 +16,12 @@ EXPOSE 3000
 # Copy the rest of your app's source code from your host to your image filesystem.
 COPY . .
 
-RUN export NODE_ENV=development
+RUN export NODE_ENV=production
 
-# RUN npm run build
+RUN npm run build
+
 
 # Run the specified command within the container.
 # CMD ["nuxt", "start", "-H", "0.0.0.0"]
+
 
