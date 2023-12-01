@@ -1,4 +1,4 @@
-const API_BASE = process.env.NODE_ENV && process.env.NODE_ENV === "development" ? "https://localhost:8000" : "https://localhost:80";
+const API_BASE = process.env.NODE_ENV && process.env.NODE_ENV === "development" ? "http://localhost:8000" : "http://localhost:80";
 
 const BACKEND_URL: string = `${API_BASE}/api`;
 const CLOUDINARY_BASE_URL: string = "https://res.cloudinary.com/shayon-cloud/image/upload/v1691683509";

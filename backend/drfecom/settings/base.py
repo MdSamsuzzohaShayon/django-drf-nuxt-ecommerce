@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # DEBUG = os.environ.get("DEBUG").upper() == 'True'.upper()
 DEBUG = os.environ.get("PYENV") != "production"
-print(os.environ.get("PYENV")) 
+# print(os.environ.get("PYENV")) 
 
 
 # print(os.environ.get("DEBUG").upper(), 'True'.upper(), os.environ.get("DEBUG").upper() == 'True'.upper())

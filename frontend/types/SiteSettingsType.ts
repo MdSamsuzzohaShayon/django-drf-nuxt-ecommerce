@@ -19,8 +19,16 @@ interface AddressInterface{
     value: string;
 }
 
+interface AdvantagesInt{
+    id: number;
+    title: string;
+    desc: string;
+    icon: string
+}
+
 export {
     SocialLinkInterface,
     NewArrivalInterface,
-    AddressInterface
+    AddressInterface,
+    AdvantagesInt
 }

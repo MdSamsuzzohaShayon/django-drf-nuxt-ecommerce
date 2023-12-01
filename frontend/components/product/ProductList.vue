@@ -18,7 +18,7 @@
                 <tr v-for="product in productList">
                     <td class="p-2 text-center border border-teal-900/50">{{ product.id }}</td>
                     <td class="p-2 text-center border border-teal-900/50">{{ product.title }}</td>
-                    <td class="p-2 text-center border border-teal-900/50">{{ product.category.name }}</td>
+                    <td class="p-2 text-center border border-teal-900/50">{{ product.category?.name }}</td>
                     <td class="p-2 text-center border border-teal-900/50">{{ product.price }}</td>
                     <td class="p-2 text-center border border-teal-900/50">{{ product.discount_price }}</td>
                     <td class="p-2 text-center border border-teal-900/50">{{ product.total_stock }}</td>

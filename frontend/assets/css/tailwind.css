@@ -49,9 +49,8 @@ body {
 .min-h-80{
     min-height: 80vh;
 }
-.user-dashboard, .admin-panel{
-    min-height: unset;
-}
+
+
 
 .remove-arrow::-webkit-inner-spin-button,
 .remove-arrow::-webkit-outer-spin-button {

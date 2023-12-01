@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20983dfc-fabd-45b3-9728-d07e95c57f9d" name="Changes" comment="" />
+    <list default="true" id="20983dfc-fabd-45b3-9728-d07e95c57f9d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drfecom/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/drfecom/settings/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/assets/css/tailwind.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/assets/css/tailwind.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/components/category/Category.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/components/category/Category.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/components/product/ProductDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/components/product/ProductDetail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/pages/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/pages/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/pages/products/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/pages/products/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/stores/SettingsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/stores/SettingsStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/types/SiteSettingsType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/types/SiteSettingsType.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/utils/keys.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/utils/keys.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

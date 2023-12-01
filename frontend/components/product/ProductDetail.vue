@@ -64,6 +64,9 @@ import useUserStore from '../../stores/UserStore';
 import useOrderStore from '../../stores/OrderStore';
 import { OrderInterface } from '../../types/ProductOrderType';
 
+console.log(styles);
+
+
 const { product } = defineProps(['product']);
 
 const productStore = useProductStore();

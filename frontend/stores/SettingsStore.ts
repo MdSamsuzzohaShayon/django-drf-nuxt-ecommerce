@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { SocialLinkInterface, NewArrivalInterface, AddressInterface } from "types/SiteSettingsType";
+import { SocialLinkInterface, NewArrivalInterface, AddressInterface, AdvantagesInt } from "types/SiteSettingsType";
 import { ProductInterface } from 'types/ProductType';
 
 const useSettingsStore = defineStore('settingsStore', {
@@ -11,6 +11,7 @@ const useSettingsStore = defineStore('settingsStore', {
         ] as SocialLinkInterface[],
         logoUrl: "/logo.png" as string,
         siteTitle: "Shakil Furniture",
+        siteDesc: "Discover a world of exquisite furniture where style meets functionality. Elevate your living spaces with our curated collection of timeless pieces, designed to transform your house into a home.",
         newArrivals: [
             { id: 1, title: "Product 1", category: 1, description: "Desc", image1: "/img/bg-1.jpg" },
             { id: 2, title: "Product 2", category: 2, description: "Desc", image1: "/img/bg-2.jpg" },
@@ -22,6 +23,11 @@ const useSettingsStore = defineStore('settingsStore', {
             { id: 3, name: "Phone", value: "0178346734643" },
             { id: 4, name: "Email", value: "admin@shakilfurniture.com" },
         ] as AddressInterface[],
+        advantages: [
+            {id: 1, title: "Returns & Warranty", desc: "Shakil Furniture provides an easy, hassle-free servicing system where we pick up your product from your home if there is any problem and get it back to you.", icon: "mdi:account-reactivate-outline"},
+            {id: 2, title: "EMI Policy", desc: "To avail EMI, Place your order through Website and share your order ID in our Inbox. We will share the EMI payment link.", icon: "la:truck-loading"},
+            {id: 3, title: "Free Delivery", desc: "FREE home delivery with assembling inside Dhaka within 3 days and 5-7 days anywhere in Bangladesh. Inside Dhaka City, we offer free home delivery to the ground floor through courier.", icon: "fluent-mdl2:feedback-response-solid"},
+        ] as AdvantagesInt[],
         trustedCompanyLogos: [
             '10_Minute_School.png',
             'brac.png',
@@ -31,7 +37,7 @@ const useSettingsStore = defineStore('settingsStore', {
         ] as string[],
         featuredProductList: [] as ProductInterface[],
         selectedProductId: 1 as number,
-        heightProductPrice: 10000 as number
+        heightProductPrice: 10000 as number,
     }),
     actions: {
         setFeaturedProducts(productList: ProductInterface[]) {
