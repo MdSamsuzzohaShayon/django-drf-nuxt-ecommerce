@@ -8,4 +8,13 @@
 
 ### Reference
  - [Specifies an array of filenames or patterns to include in the program. These filenames are resolved relative to the directory containing the tsconfig.json file.](https://www.typescriptlang.org/tsconfig#include)
+
+
+ - By default add all district with default prices
+ - Access token lifetime 15 minutes
+ - Refresh token lifetime 1 day
+ - Make seo for all pages
+ - Make home page complete
+ - Watch SSLCommerz tutorial
+ - Check if the token is invalid - make a request with refresh token to get new access token
  

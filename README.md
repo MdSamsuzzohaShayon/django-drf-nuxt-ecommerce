@@ -3,30 +3,70 @@
  - [Tutorial](https://www.youtube.com/watch?v=jUsm_LV4_cE&list=PLOLrQ9Pn6cawinBJbH5d9IfloO9RRPMiq&index=8), [Tutorial 2](https://www.youtube.com/watch?v=EbLEyM9SyZQ&list=PLOLrQ9Pn6cay_cQkyg-WYYiJ_EKU8KWKh), [tutorial 3](https://www.youtube.com/watch?v=tujhGdn1EMI), [Tutorial 4](https://www.youtube.com/watch?v=xjMP0hspNLE&list=PL-51WBLyFTg1gPEHotYAhNAPsisChkyTc), [tutorial 5](https://www.youtube.com/watch?v=lo7lBD9ynVc&t=14s)
 
 ### Instructions
+ - Preload pages
+ - Add **load more** button
+ - Loader for making any api requests
+ - Page transition and Animation
+ - Change status by admin
+ - Fix image size in single product page
+ - Show total Cart items on the menu
+ - Use Supabase for database solution
+ - Use cloudinary for image storage solution
+ - The REAL Cost Of AWS, https://planetscale.com/pricing , https://clerk.com/?utm_source=www.google.com&utm_medium=referral&utm_campaign=none
+ - SEO For Every single page
  - Create a table with all single data staff of the website such as logo, title, background image, offer, description, and more
- - Create a table for address
  - Make a loader in frontend to fetch data
- - On delete product or category, images should be deleted from the folder too
- - customize django rest framework user password validation
- - Add first name, last name for user
+ - ✅✅ On delete product or category, images should be deleted from the folder too
+ - ✅✅ customize django rest framework user password validation
+ - ✅✅ Add first name, last name for user
  - Refresh token is not rotating properly
- - Use forget password for user
- - Search by product and category
- - Filter products by different value
- - For frontend user gatsby js, and typescript, and materaize css
- - Gatsby tutorial - https://www.youtube.com/watch?v=e7sqKE0ODdI
+ - ✅✅ Use forget password for user
+ - ✅✅ Search by product and category
+ - ✅✅ Filter products by different value
  - Use jwt auth token with refresh token
  - Login user with **gmail or username** and **password**
- - One admin panel for admin and staff
+ - ✅✅ One admin panel for admin and staff
  - One customer dashboard
  - Save tokens in client side cookies
+ - Stop `gunicorn` using `netstat -ntlp` and `kill -9 PID`
+
+### SSLCommerz
+ - [Create sandbox account for testing and for production create real account](https://developer.sslcommerz.com/doc/v4/)
+ - [Library for python](https://github.com/sslcommerz/SSLCommerz-Python), [API Using curl](https://developer.sslcommerz.com/doc/v4/#initiate-payment)
+
+### BKash API
+ - BKash overview - https://www.youtube.com/watch?v=i8TT8-DAF5Q
+ - Code - https://www.youtube.com/watch?v=B4xM7rBk2R8&list=PLD11cPzGpfKT1o2OTydIecmyHII5tZl_F&index=2
+ - Need a merchant account
+ - Request a new product
+ - Tokenized checkout overflow - https://developer.bka.sh/docs/tokenized-checkout-overview
+ - Token Management Overview - https://developer.bka.sh/docs/token-management-overview-3
+ 
+
+### Ask about
+ - SSLCommerz and product delivery change
+
+### Docker
+ - Copy files from exited container `docker cp <container_id_or_name>:<path_to_file_or_directory_in_container> <path_to_destination_on_host>`
+ - Run project with docker on development `sudo dockercompose -f docker-compose.dev.yml up -d`
+ - Restart nginx `sudo docker compose restart nginx`
 
 ### Deployment
- - Docarize the application
+ - Make docker environment for development and productions
+ - Clone code from github
+ - Run Docker container `docker compose up -d --build`
+ - Make migrations and migrate with docker 
+    ```
+    sudo docker compose run backend python manage.py makemigrations
+    sudo docker compose run backend python manage.py migrate
+    ```
+ - Create superuser in django `sudo docker compose run backend python manage.py createsuperuser`
+ - Setup github actions with docker
+ - Intract with container `sudo docker exec -it con_name sh` use `sh` for alpine based image and use `bash` for others
  - Setup postgres database
  - Change environment variables
- - Create superuser in django
  - Remove default django admin 
+
 
 
  - Setup
@@ -82,6 +122,9 @@
  - Serializers allow complex data such as querysets and model instances to be converted to native Python datatypes that can then be easily rendered into JSON, XML or other content types.
  - The ModelSerializer class provides a shortcut that lets you automatically create a Serializer class with fields that correspond to the Model fields.
  - Field-level validation -> https://www.django-rest-framework.org/api-guide/serializers/#field-level-validation
+ - [Overriding predefined model methods](https://docs.djangoproject.com/en/4.2/topics/db/models/#overriding-predefined-model-methods)
+ - [Cloudinary's Python SDK provides simple, yet comprehensive image and video upload](https://cloudinary.com/documentation/django_integration)
+ - [If you are using Django, you can integrate Cloudinary's uploading capabilities into your forms and models using Cloudinary's helper classes.](https://cloudinary.com/documentation/django_image_and_video_upload#django_forms_and_models)
  - Object-level validation -> https://www.django-rest-framework.org/api-guide/serializers/#object-level-validation
  - The following example demonstrates how you might handle creating a user with a nested profile object.
  - .create() and .update() - Override either or both of these to support saving instances.

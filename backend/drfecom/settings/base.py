@@ -10,11 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os 
+import logging
 from pathlib import Path
-from dotenv import load_dotenv
 from datetime import timedelta
 
-load_dotenv()
+if os.environ.get("PYENV") != "production":
+    from dotenv import load_dotenv
+    load_dotenv(".env.dev")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,11 +28,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = True
+# DEBUG = os.environ.get("DEBUG").upper() == 'True'.upper()
+DEBUG = os.environ.get("PYENV") != "production"
+# print(os.environ.get("PYENV")) 
+
+
+# print(os.environ.get("DEBUG").upper(), 'True'.upper(), os.environ.get("DEBUG").upper() == 'True'.upper())
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,11 +51,15 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     "corsheaders",
+    'cloudinary',
 
     # Internal Apps
     'products',
     'accounts',
     'orders',
+    'contacts',
+    'wishlist',
+    'layout',
 ]
 
 MIDDLEWARE = [
@@ -64,8 +74,10 @@ MIDDLEWARE = [
 ]
 
 
+# CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     os.getenv("FRONTEND_URL"),
+    "http://localhost",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
@@ -210,3 +222,25 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+
+
+
+CLOUDINARY = {
+  'cloud_name': os.environ.get('CLOUDINARY_CLOUD_NAME'),  
+  'api_key': os.environ.get('CLOUDINARY_API_KEY'),  
+  'api_secret': os.environ.get('CLOUDINARY_API_SECRET'),  
+}
+
+# cloudinary.config( 
+#   cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME'), 
+#   api_key = os.environ.get('CLOUDINARY_API_KEY'), 
+#   api_secret = os.environ.get('CLOUDINARY_API_SECRET'),
+# #   secure = True
+# )
+
+
+
+
+
+
+

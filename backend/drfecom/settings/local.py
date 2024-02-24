@@ -12,3 +12,11 @@ DATABASES = {
 }
 
 
+
+LOGGING = {
+    "version": 1,  # the dictConfig format version
+    "disable_existing_loggers": False,  # retain the default loggers
+    "class": "logging.FileHandler",
+    "filename": "console.log",
+    "level": "DEBUG",
+}

@@ -13,7 +13,22 @@ interface NewArrivalInterface{
     image1: string
 }
 
+interface AddressInterface{
+    id: number;
+    name: string;
+    value: string;
+}
+
+interface AdvantagesInt{
+    id: number;
+    title: string;
+    desc: string;
+    icon: string
+}
+
 export {
     SocialLinkInterface,
-    NewArrivalInterface
+    NewArrivalInterface,
+    AddressInterface,
+    AdvantagesInt
 }
